@@ -55,11 +55,11 @@ interface LeaveRequest {
     first_name: string;
     last_name: string;
     employee_id: string;
-  };
+  } | null;
   leave_type?: {
     leave_name: string;
     leave_code: string;
-  };
+  } | null;
 }
 
 export default function LeaveManager() {
@@ -113,7 +113,7 @@ export default function LeaveManager() {
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-      setLeaveRequests(data || []);
+      setLeaveRequests((data as unknown as LeaveRequest[]) || []);
     } catch (error: any) {
       toast({
         title: "Error fetching leave requests",
