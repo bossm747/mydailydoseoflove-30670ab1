@@ -31,6 +31,10 @@ import { PaymentManager } from "@/components/payments/PaymentManager";
 import AnalyticsDashboard from "@/components/analytics/AnalyticsDashboard";
 import { KPIDashboard } from "@/components/analytics/KPIDashboard";
 import { DataExport } from "@/components/analytics/DataExport";
+import { EmailTemplateManager } from "@/components/integrations/EmailTemplateManager";
+import { FileUploadManager } from "@/components/integrations/FileUploadManager";
+import { WebhookManager } from "@/components/integrations/WebhookManager";
+import { IntegrationManager } from "@/components/integrations/IntegrationManager";
 import { useState } from "react";
 
 const Index = () => {
@@ -88,6 +92,14 @@ const Index = () => {
         return <KPIDashboard />;
       case 'export':
         return <DataExport />;
+      case 'emails':
+        return <EmailTemplateManager />;
+      case 'files':
+        return <FileUploadManager />;
+      case 'webhooks':
+        return <WebhookManager />;
+      case 'integrations':
+        return <IntegrationManager />;
       case 'memories':
         return <MemoryGallery />;
       case 'mood':

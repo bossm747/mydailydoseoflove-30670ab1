@@ -54,6 +54,68 @@ export type Database = {
         }
         Relationships: []
       }
+      api_logs: {
+        Row: {
+          business_id: string | null
+          created_at: string
+          endpoint: string
+          error_message: string | null
+          id: string
+          integration_id: string | null
+          method: string
+          request_body: string | null
+          request_headers: Json | null
+          response_body: string | null
+          response_headers: Json | null
+          response_status: number | null
+          response_time_ms: number | null
+          status: string
+          user_id: string
+        }
+        Insert: {
+          business_id?: string | null
+          created_at?: string
+          endpoint: string
+          error_message?: string | null
+          id?: string
+          integration_id?: string | null
+          method: string
+          request_body?: string | null
+          request_headers?: Json | null
+          response_body?: string | null
+          response_headers?: Json | null
+          response_status?: number | null
+          response_time_ms?: number | null
+          status?: string
+          user_id: string
+        }
+        Update: {
+          business_id?: string | null
+          created_at?: string
+          endpoint?: string
+          error_message?: string | null
+          id?: string
+          integration_id?: string | null
+          method?: string
+          request_body?: string | null
+          request_headers?: Json | null
+          response_body?: string | null
+          response_headers?: Json | null
+          response_status?: number | null
+          response_time_ms?: number | null
+          status?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "api_logs_integration_id_fkey"
+            columns: ["integration_id"]
+            isOneToOne: false
+            referencedRelation: "integrations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       assets: {
         Row: {
           asset_name: string
@@ -580,6 +642,113 @@ export type Database = {
         }
         Relationships: []
       }
+      email_logs: {
+        Row: {
+          body_html: string | null
+          body_text: string | null
+          business_id: string | null
+          clicked_at: string | null
+          created_at: string
+          error_message: string | null
+          id: string
+          metadata: Json | null
+          opened_at: string | null
+          recipient_email: string
+          sender_email: string
+          sent_at: string | null
+          status: string
+          subject: string
+          template_id: string | null
+          user_id: string
+        }
+        Insert: {
+          body_html?: string | null
+          body_text?: string | null
+          business_id?: string | null
+          clicked_at?: string | null
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          metadata?: Json | null
+          opened_at?: string | null
+          recipient_email: string
+          sender_email: string
+          sent_at?: string | null
+          status?: string
+          subject: string
+          template_id?: string | null
+          user_id: string
+        }
+        Update: {
+          body_html?: string | null
+          body_text?: string | null
+          business_id?: string | null
+          clicked_at?: string | null
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          metadata?: Json | null
+          opened_at?: string | null
+          recipient_email?: string
+          sender_email?: string
+          sent_at?: string | null
+          status?: string
+          subject?: string
+          template_id?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "email_logs_template_id_fkey"
+            columns: ["template_id"]
+            isOneToOne: false
+            referencedRelation: "email_templates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      email_templates: {
+        Row: {
+          body_template: string
+          business_id: string | null
+          created_at: string
+          id: string
+          is_active: boolean
+          subject_template: string
+          template_name: string
+          template_type: string
+          updated_at: string
+          user_id: string
+          variables: Json | null
+        }
+        Insert: {
+          body_template: string
+          business_id?: string | null
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          subject_template: string
+          template_name: string
+          template_type?: string
+          updated_at?: string
+          user_id: string
+          variables?: Json | null
+        }
+        Update: {
+          body_template?: string
+          business_id?: string | null
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          subject_template?: string
+          template_name?: string
+          template_type?: string
+          updated_at?: string
+          user_id?: string
+          variables?: Json | null
+        }
+        Relationships: []
+      }
       employees: {
         Row: {
           address: Json | null
@@ -775,6 +944,60 @@ export type Database = {
         }
         Relationships: []
       }
+      file_uploads: {
+        Row: {
+          business_id: string | null
+          created_at: string
+          file_category: string
+          file_path: string
+          file_size_bytes: number
+          id: string
+          is_public: boolean
+          mime_type: string
+          original_filename: string
+          related_id: string | null
+          related_table: string | null
+          stored_filename: string
+          updated_at: string
+          upload_source: string
+          user_id: string
+        }
+        Insert: {
+          business_id?: string | null
+          created_at?: string
+          file_category?: string
+          file_path: string
+          file_size_bytes: number
+          id?: string
+          is_public?: boolean
+          mime_type: string
+          original_filename: string
+          related_id?: string | null
+          related_table?: string | null
+          stored_filename: string
+          updated_at?: string
+          upload_source?: string
+          user_id: string
+        }
+        Update: {
+          business_id?: string | null
+          created_at?: string
+          file_category?: string
+          file_path?: string
+          file_size_bytes?: number
+          id?: string
+          is_public?: boolean
+          mime_type?: string
+          original_filename?: string
+          related_id?: string | null
+          related_table?: string | null
+          stored_filename?: string
+          updated_at?: string
+          upload_source?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       financial_forecasts: {
         Row: {
           base_amount: number
@@ -818,6 +1041,57 @@ export type Database = {
           id?: string
           notes?: string | null
           start_date?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      integrations: {
+        Row: {
+          business_id: string | null
+          configuration: Json
+          created_at: string
+          credentials: Json | null
+          error_message: string | null
+          id: string
+          integration_name: string
+          integration_type: string
+          is_active: boolean
+          last_sync_at: string | null
+          provider_name: string
+          sync_status: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          business_id?: string | null
+          configuration?: Json
+          created_at?: string
+          credentials?: Json | null
+          error_message?: string | null
+          id?: string
+          integration_name: string
+          integration_type: string
+          is_active?: boolean
+          last_sync_at?: string | null
+          provider_name: string
+          sync_status?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          business_id?: string | null
+          configuration?: Json
+          created_at?: string
+          credentials?: Json | null
+          error_message?: string | null
+          id?: string
+          integration_name?: string
+          integration_type?: string
+          is_active?: boolean
+          last_sync_at?: string | null
+          provider_name?: string
+          sync_status?: string | null
           updated_at?: string
           user_id?: string
         }
@@ -3137,11 +3411,129 @@ export type Database = {
         }
         Relationships: []
       }
+      webhook_logs: {
+        Row: {
+          attempt_number: number
+          created_at: string
+          error_message: string | null
+          event_data: Json
+          event_type: string
+          id: string
+          request_body: string
+          request_headers: Json | null
+          request_url: string
+          response_body: string | null
+          response_headers: Json | null
+          response_status: number | null
+          sent_at: string | null
+          status: string
+          webhook_id: string
+        }
+        Insert: {
+          attempt_number?: number
+          created_at?: string
+          error_message?: string | null
+          event_data: Json
+          event_type: string
+          id?: string
+          request_body: string
+          request_headers?: Json | null
+          request_url: string
+          response_body?: string | null
+          response_headers?: Json | null
+          response_status?: number | null
+          sent_at?: string | null
+          status?: string
+          webhook_id: string
+        }
+        Update: {
+          attempt_number?: number
+          created_at?: string
+          error_message?: string | null
+          event_data?: Json
+          event_type?: string
+          id?: string
+          request_body?: string
+          request_headers?: Json | null
+          request_url?: string
+          response_body?: string | null
+          response_headers?: Json | null
+          response_status?: number | null
+          sent_at?: string | null
+          status?: string
+          webhook_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "webhook_logs_webhook_id_fkey"
+            columns: ["webhook_id"]
+            isOneToOne: false
+            referencedRelation: "webhooks"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      webhooks: {
+        Row: {
+          business_id: string | null
+          created_at: string
+          event_types: string[]
+          headers: Json | null
+          id: string
+          is_active: boolean
+          retry_count: number
+          timeout_seconds: number
+          updated_at: string
+          user_id: string
+          webhook_name: string
+          webhook_secret: string | null
+          webhook_url: string
+        }
+        Insert: {
+          business_id?: string | null
+          created_at?: string
+          event_types: string[]
+          headers?: Json | null
+          id?: string
+          is_active?: boolean
+          retry_count?: number
+          timeout_seconds?: number
+          updated_at?: string
+          user_id: string
+          webhook_name: string
+          webhook_secret?: string | null
+          webhook_url: string
+        }
+        Update: {
+          business_id?: string | null
+          created_at?: string
+          event_types?: string[]
+          headers?: Json | null
+          id?: string
+          is_active?: boolean
+          retry_count?: number
+          timeout_seconds?: number
+          updated_at?: string
+          user_id?: string
+          webhook_name?: string
+          webhook_secret?: string | null
+          webhook_url?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
+      process_webhook_event: {
+        Args: {
+          p_event_type: string
+          p_event_data: Json
+          p_business_id?: string
+        }
+        Returns: boolean
+      }
       track_analytics_event: {
         Args: {
           p_event_type: string

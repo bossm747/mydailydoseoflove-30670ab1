@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { 
   Heart, Home, DollarSign, Calendar, MessageCircle, Settings, Menu, LogOut, 
   TrendingUp, Users, UserCheck, Clock, Package, CheckCircle, Receipt, 
-  BarChart3, Target, Download 
+  BarChart3, Target, Download, Mail, Upload, Webhook, Zap
 } from "lucide-react";
 import { useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
@@ -76,6 +76,15 @@ export default function MobileNavigation({ activeTab, onTabChange }: MobileNavig
         { id: 'kpis', label: 'KPIs', icon: Target },
         { id: 'reports', label: 'Reports', icon: Calendar },
         { id: 'export', label: 'Export', icon: Download }
+      ]
+    },
+    {
+      title: "Integrations",
+      items: [
+        { id: 'emails', label: 'Email Templates', icon: Mail },
+        { id: 'files', label: 'File Manager', icon: Upload },
+        { id: 'webhooks', label: 'Webhooks', icon: Webhook },
+        { id: 'integrations', label: 'Integrations', icon: Zap }
       ]
     },
     {

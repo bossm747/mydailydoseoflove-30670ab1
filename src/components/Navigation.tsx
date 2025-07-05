@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Heart, Home, DollarSign, Calendar, MessageCircle, Settings, LogOut, TrendingUp, Users, UserCheck, Clock, Package, CheckCircle, Receipt, BarChart3, Target, Download } from "lucide-react";
+import { Heart, Home, DollarSign, Calendar, MessageCircle, Settings, LogOut, TrendingUp, Users, UserCheck, Clock, Package, CheckCircle, Receipt, BarChart3, Target, Download, Mail, Upload, Webhook, Zap } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import { BusinessSelector } from "./business/BusinessSelector";
@@ -37,6 +37,10 @@ export default function Navigation({ activeTab, onTabChange }: NavigationProps) 
     { id: 'kpis', label: 'KPIs', icon: Target },
     { id: 'reports', label: 'Reports', icon: Calendar },
     { id: 'export', label: 'Export', icon: Download },
+    { id: 'emails', label: 'Email Templates', icon: Mail },
+    { id: 'files', label: 'File Manager', icon: Upload },
+    { id: 'webhooks', label: 'Webhooks', icon: Webhook },
+    { id: 'integrations', label: 'Integrations', icon: Zap },
     { id: 'business-manager', label: 'Businesses', icon: Home },
     { id: 'projects', label: 'Projects', icon: Calendar },
     { id: 'tasks', label: 'Tasks', icon: CheckCircle },
