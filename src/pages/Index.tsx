@@ -1,4 +1,5 @@
-import Navigation from "@/components/Navigation";
+import { AppSidebar } from "@/components/AppSidebar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import InstallPrompt from "@/components/InstallPrompt";
 import Dashboard from "@/components/Dashboard";
 import FinanceDashboard from "@/components/FinanceDashboard";
@@ -128,13 +129,31 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <Navigation activeTab={activeTab} onTabChange={setActiveTab} />
-      <main className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-        {renderContent()}
-      </main>
-      <InstallPrompt />
-    </div>
+    <SidebarProvider>
+      <div className="min-h-screen flex w-full bg-background">
+        <AppSidebar activeTab={activeTab} onTabChange={setActiveTab} />
+        
+        <div className="flex-1 flex flex-col min-w-0">
+          {/* Header with trigger */}
+          <header className="h-14 flex items-center gap-3 border-b bg-card px-4">
+            <SidebarTrigger className="-ml-1" />
+            <div className="flex-1" />
+            <div className="text-sm font-medium">
+              MarcLyn Business Hub
+            </div>
+          </header>
+
+          {/* Main content */}
+          <main className="flex-1 overflow-auto">
+            <div className="container mx-auto py-6 px-4 sm:px-6 lg:px-8">
+              {renderContent()}
+            </div>
+          </main>
+        </div>
+
+        <InstallPrompt />
+      </div>
+    </SidebarProvider>
   );
 };
 
