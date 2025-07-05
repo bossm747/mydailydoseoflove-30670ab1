@@ -75,6 +75,9 @@ export function AppSidebar({ activeTab, onTabChange }: AppSidebarProps) {
       label: "Sales & CRM",
       items: [
         { id: 'sales', label: 'Sales Dashboard', icon: TrendingUp },
+        { id: 'opportunities', label: 'Opportunities', icon: Target },
+        { id: 'pipeline', label: 'Sales Pipeline', icon: TrendingUp },
+        { id: 'quotes', label: 'Quotes', icon: FileText },
         { id: 'customers', label: 'Customers', icon: Users },
         { id: 'leads', label: 'Leads', icon: UserCheck },
       ]
@@ -102,6 +105,7 @@ export function AppSidebar({ activeTab, onTabChange }: AppSidebarProps) {
       label: "Financial Management",
       items: [
         { id: 'finance', label: 'Finance Dashboard', icon: PieChart },
+        { id: 'budgets', label: 'Budget Management', icon: PieChart },
         { id: 'banking', label: 'Banking', icon: CreditCard },
         { id: 'assets', label: 'Assets', icon: Building2 },
         { id: 'debts', label: 'Debts', icon: CreditCard },

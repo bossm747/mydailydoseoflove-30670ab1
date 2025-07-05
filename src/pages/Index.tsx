@@ -40,6 +40,10 @@ import GlobalSearch from "@/components/search/GlobalSearch";
 import BulkOperations from "@/components/bulk/BulkOperations";
 import AdvancedSecurity from "@/components/security/AdvancedSecurity";
 import PerformanceMonitor from "@/components/performance/PerformanceMonitor";
+import OpportunityManager from "@/components/opportunities/OpportunityManager";
+import SalesPipelineManager from "@/components/pipeline/SalesPipelineManager";
+import BudgetManager from "@/components/budget/BudgetManager";
+import QuoteManager from "@/components/quotes/QuoteManager";
 import { useState } from "react";
 
 const Index = () => {
@@ -51,6 +55,12 @@ const Index = () => {
         return <Dashboard />;
       case 'sales':
         return <SalesDashboard />;
+      case 'opportunities':
+        return <OpportunityManager />;
+      case 'pipeline':
+        return <SalesPipelineManager />;
+      case 'quotes':
+        return <QuoteManager />;
       case 'customers':
         return <CustomerManager />;
       case 'leads':
@@ -71,6 +81,8 @@ const Index = () => {
         return <InventoryManager />;
       case 'finance':
         return <FinanceDashboard />;
+      case 'budgets':
+        return <BudgetManager />;
       case 'banking':
         return <BankAccountManager />;
       case 'assets':
