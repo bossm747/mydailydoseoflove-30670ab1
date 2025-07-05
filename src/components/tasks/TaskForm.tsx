@@ -1,95 +1,92 @@
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Card, CardContent } from '@/components/ui/card';
-import { Calendar } from '@/components/ui/calendar';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { CalendarIcon, Plus, CheckSquare } from 'lucide-react';
-import { format } from 'date-fns';
-import { cn } from '@/lib/utils';
-import { supabase } from '@/integrations/supabase/client';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { useAuth } from '@/hooks/useAuth';
+import { useBusinessContext } from '@/contexts/BusinessContext';
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
 
 interface TaskFormProps {
   onSuccess?: () => void;
   trigger?: React.ReactNode;
 }
 
-const priorities = [
-  { value: 'low', label: 'Low', color: 'bg-muted' },
-  { value: 'medium', label: 'Medium', color: 'bg-warning' },
-  { value: 'high', label: 'High', color: 'bg-destructive' }
-];
-
-const statuses = [
-  { value: 'pending', label: 'Pending' },
-  { value: 'in_progress', label: 'In Progress' },
-  { value: 'completed', label: 'Completed' },
-  { value: 'cancelled', label: 'Cancelled' }
-];
-
 export default function TaskForm({ onSuccess, trigger }: TaskFormProps) {
   const { user } = useAuth();
+  const { currentBusiness } = useBusinessContext();
   const { toast } = useToast();
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [dueDate, setDueDate] = useState<Date>();
-  
-  const [formData, setFormData] = useState({
-    title: '',
-    description: '',
-    priority: 'medium',
-    status: 'pending',
-    assigned_to: ''
-  });
+  const [projects, setProjects] = useState<any[]>([]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  useEffect(() => {
+    if (user) {
+      fetchProjects();
+    }
+  }, [user, currentBusiness]);
+
+  const fetchProjects = async () => {
+    try {
+      let query = supabase
+        .from('projects')
+        .select('id, project_name, project_code')
+        .eq('user_id', user!.id);
+
+      if (currentBusiness) {
+        query = query.eq('business_id', currentBusiness.id);
+      }
+
+      const { data, error } = await query;
+      if (error) throw error;
+      setProjects(data || []);
+    } catch (error: any) {
+      console.error('Error fetching projects:', error);
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!user) return;
 
     setLoading(true);
+    const formData = new FormData(e.currentTarget);
+
+    const taskData = {
+      business_id: currentBusiness?.id || null,
+      user_id: user.id,
+      project_id: formData.get('project_id') as string,
+      task_name: formData.get('task_name') as string,
+      description: formData.get('description') as string || null,
+      status: formData.get('status') as string,
+      priority: formData.get('priority') as string,
+      start_date: formData.get('start_date') as string || null,
+      due_date: formData.get('due_date') as string || null,
+      estimated_hours: parseFloat(formData.get('estimated_hours') as string) || null,
+      completion_percentage: parseInt(formData.get('completion_percentage') as string) || 0,
+    };
+
     try {
       const { error } = await supabase
-        .from('tasks')
-        .insert([
-          {
-            user_id: user.id,
-            title: formData.title,
-            description: formData.description,
-            priority: formData.priority,
-            status: formData.status,
-            assigned_to: formData.assigned_to || user.id,
-            due_date: dueDate ? format(dueDate, 'yyyy-MM-dd') : null
-          }
-        ]);
+        .from('project_tasks')
+        .insert([taskData]);
 
       if (error) throw error;
 
       toast({
         title: "Task created",
-        description: `${formData.title} has been added to your business tasks.`,
+        description: "New task has been created successfully.",
       });
 
-      setFormData({
-        title: '',
-        description: '',
-        priority: 'medium',
-        status: 'pending',
-        assigned_to: ''
-      });
-      setDueDate(undefined);
       setOpen(false);
-      onSuccess?.();
-    } catch (error) {
-      console.error('Error adding task:', error);
+      if (onSuccess) onSuccess();
+    } catch (error: any) {
       toast({
-        title: "Failed to create task",
-        description: "Please try again.",
+        title: "Error",
+        description: error.message,
         variant: "destructive",
       });
     } finally {
@@ -100,126 +97,142 @@ export default function TaskForm({ onSuccess, trigger }: TaskFormProps) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        {trigger || (
-          <Button className="btn-primary">
-            <Plus className="h-4 w-4 mr-2" />
-            Add Task
-          </Button>
-        )}
+        {trigger || <Button>Create Task</Button>}
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[500px]">
+      <DialogContent className="max-w-2xl">
         <DialogHeader>
-          <DialogTitle className="flex items-center space-x-2">
-            <CheckSquare className="h-5 w-5 text-primary" />
-            <span>Create Business Task</span>
-          </DialogTitle>
+          <DialogTitle>Create New Task</DialogTitle>
+          <DialogDescription>
+            Add a new task to your project portfolio
+          </DialogDescription>
         </DialogHeader>
-        
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <Card>
-            <CardContent className="pt-6 space-y-4">
-              {/* Title */}
-              <div>
-                <Label htmlFor="title">Task Title</Label>
-                <Input
-                  id="title"
-                  placeholder="Update website, prepare proposal, client meeting..."
-                  value={formData.title}
-                  onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
-                  required
-                />
-              </div>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <Label htmlFor="task_name">Task Name *</Label>
+              <Input
+                id="task_name"
+                name="task_name"
+                required
+                placeholder="Implement user authentication"
+                className="mt-1"
+              />
+            </div>
+            <div>
+              <Label htmlFor="project_id">Project *</Label>
+              <Select name="project_id" required>
+                <SelectTrigger className="mt-1">
+                  <SelectValue placeholder="Select project" />
+                </SelectTrigger>
+                <SelectContent>
+                  {projects.map((project) => (
+                    <SelectItem key={project.id} value={project.id}>
+                      {project.project_name} ({project.project_code})
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
 
-              {/* Description */}
-              <div>
-                <Label htmlFor="description">Description</Label>
-                <Textarea
-                  id="description"
-                  placeholder="Detailed description of the task requirements..."
-                  value={formData.description}
-                  onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
-                  rows={3}
-                />
-              </div>
+          <div>
+            <Label htmlFor="description">Description</Label>
+            <Textarea
+              id="description"
+              name="description"
+              rows={3}
+              className="mt-1"
+              placeholder="Describe the task requirements and objectives..."
+            />
+          </div>
 
-              {/* Priority & Status */}
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <Label>Priority</Label>
-                  <Select value={formData.priority} onValueChange={(value) => 
-                    setFormData(prev => ({ ...prev, priority: value }))
-                  }>
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {priorities.map((priority) => (
-                        <SelectItem key={priority.value} value={priority.value}>
-                          <div className="flex items-center space-x-2">
-                            <div className={`w-2 h-2 rounded-full ${priority.color}`}></div>
-                            <span>{priority.label}</span>
-                          </div>
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-                
-                <div>
-                  <Label>Status</Label>
-                  <Select value={formData.status} onValueChange={(value) => 
-                    setFormData(prev => ({ ...prev, status: value }))
-                  }>
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {statuses.map((status) => (
-                        <SelectItem key={status.value} value={status.value}>
-                          {status.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <Label htmlFor="status">Status *</Label>
+              <Select name="status" defaultValue="not_started">
+                <SelectTrigger className="mt-1">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="not_started">Not Started</SelectItem>
+                  <SelectItem value="in_progress">In Progress</SelectItem>
+                  <SelectItem value="review">In Review</SelectItem>
+                  <SelectItem value="completed">Completed</SelectItem>
+                  <SelectItem value="on_hold">On Hold</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <Label htmlFor="priority">Priority</Label>
+              <Select name="priority" defaultValue="medium">
+                <SelectTrigger className="mt-1">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="low">Low</SelectItem>
+                  <SelectItem value="medium">Medium</SelectItem>
+                  <SelectItem value="high">High</SelectItem>
+                  <SelectItem value="urgent">Urgent</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
 
-              {/* Due Date */}
-              <div>
-                <Label>Due Date (Optional)</Label>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <Button
-                      variant="outline"
-                      className={cn(
-                        "w-full justify-start text-left font-normal",
-                        !dueDate && "text-muted-foreground"
-                      )}
-                    >
-                      <CalendarIcon className="mr-2 h-4 w-4" />
-                      {dueDate ? format(dueDate, "PPP") : <span>Set due date</span>}
-                    </Button>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0" align="start">
-                    <Calendar
-                      mode="single"
-                      selected={dueDate}
-                      onSelect={setDueDate}
-                      initialFocus
-                      className="pointer-events-auto"
-                    />
-                  </PopoverContent>
-                </Popover>
-              </div>
-            </CardContent>
-          </Card>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <Label htmlFor="start_date">Start Date</Label>
+              <Input
+                id="start_date"
+                name="start_date"
+                type="date"
+                className="mt-1"
+              />
+            </div>
+            <div>
+              <Label htmlFor="due_date">Due Date</Label>
+              <Input
+                id="due_date"
+                name="due_date"
+                type="date"
+                className="mt-1"
+              />
+            </div>
+          </div>
 
-          <div className="flex justify-end space-x-2">
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <Label htmlFor="estimated_hours">Estimated Hours</Label>
+              <Input
+                id="estimated_hours"
+                name="estimated_hours"
+                type="number"
+                step="0.5"
+                min="0"
+                className="mt-1"
+                placeholder="8"
+              />
+            </div>
+            <div>
+              <Label htmlFor="completion_percentage">Completion %</Label>
+              <Input
+                id="completion_percentage"
+                name="completion_percentage"
+                type="number"
+                min="0"
+                max="100"
+                defaultValue="0"
+                className="mt-1"
+                placeholder="0"
+              />
+            </div>
+          </div>
+
+          <div className="flex justify-end space-x-2 pt-4">
             <Button type="button" variant="outline" onClick={() => setOpen(false)}>
               Cancel
             </Button>
-            <Button type="submit" disabled={loading} className="btn-primary">
-              {loading ? "Creating..." : "Create Task"}
+            <Button type="submit" disabled={loading}>
+              {loading ? 'Creating...' : 'Create Task'}
             </Button>
           </div>
         </form>
@@ -227,3 +240,6 @@ export default function TaskForm({ onSuccess, trigger }: TaskFormProps) {
     </Dialog>
   );
 }
+
+// Export named version for TaskManager compatibility
+export { TaskForm };

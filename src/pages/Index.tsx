@@ -24,6 +24,7 @@ import TimeTracker from "@/components/hr/TimeTracker";
 import ProductCatalog from "@/components/inventory/ProductCatalog";
 import InventoryManager from "@/components/inventory/InventoryManager";
 import { ProjectManager } from "@/components/projects/ProjectManager";
+import { TaskManager } from "@/components/tasks/TaskManager";
 import { useState } from "react";
 
 const Index = () => {
@@ -67,6 +68,8 @@ const Index = () => {
         return <BusinessManager />;
       case 'projects':
         return <ProjectManager />;
+      case 'tasks':
+        return <TaskManager />;
       case 'memories':
         return <MemoryGallery />;
       case 'mood':
