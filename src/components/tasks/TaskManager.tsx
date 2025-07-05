@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Progress } from '@/components/ui/progress';
 import { Plus, Edit2, Calendar, Clock, CheckCircle, AlertCircle, User } from 'lucide-react';
@@ -54,8 +54,6 @@ export const TaskManager: React.FC = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [projects, setProjects] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [isFormOpen, setIsFormOpen] = useState(false);
-  const [editingTask, setEditingTask] = useState<Task | null>(null);
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [projectFilter, setProjectFilter] = useState<string>('all');
 
@@ -118,19 +116,8 @@ export const TaskManager: React.FC = () => {
     }
   };
 
-  const handleEdit = (task: Task) => {
-    setEditingTask(task);
-    setIsFormOpen(true);
-  };
-
-  const handleFormClose = () => {
-    setIsFormOpen(false);
-    setEditingTask(null);
-  };
-
   const handleFormSaved = () => {
     fetchTasks();
-    handleFormClose();
   };
 
   const getStatusBadge = (status: string) => {
@@ -226,10 +213,15 @@ export const TaskManager: React.FC = () => {
                 ? "Start by creating your first task" 
                 : `No tasks with status "${TASK_STATUSES.find(s => s.value === statusFilter)?.label}"`}
             </p>
-            <Button onClick={() => setIsFormOpen(true)}>
+            <TaskForm
+              onSuccess={handleFormSaved}
+              trigger={
+                <Button>
               <Plus className="mr-2 h-4 w-4" />
               Create Task
-            </Button>
+                </Button>
+              }
+            />
           </CardContent>
         </Card>
       ) : (
@@ -247,7 +239,8 @@ export const TaskManager: React.FC = () => {
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={() => handleEdit(task)}
+                    disabled
+                    title="Task editing coming soon"
                   >
                     <Edit2 className="h-4 w-4" />
                   </Button>
