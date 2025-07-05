@@ -27,6 +27,9 @@ import { ProjectManager } from "@/components/projects/ProjectManager";
 import { TaskManager } from "@/components/tasks/TaskManager";
 import { InvoiceManager } from "@/components/invoices/InvoiceManager";
 import { PaymentManager } from "@/components/payments/PaymentManager";
+import AnalyticsDashboard from "@/components/analytics/AnalyticsDashboard";
+import { KPIDashboard } from "@/components/analytics/KPIDashboard";
+import { DataExport } from "@/components/analytics/DataExport";
 import { useState } from "react";
 
 const Index = () => {
@@ -78,6 +81,12 @@ const Index = () => {
         return <InvoiceManager />;
       case 'payments':
         return <PaymentManager />;
+      case 'analytics':
+        return <AnalyticsDashboard />;
+      case 'kpis':
+        return <KPIDashboard />;
+      case 'export':
+        return <DataExport />;
       case 'memories':
         return <MemoryGallery />;
       case 'mood':

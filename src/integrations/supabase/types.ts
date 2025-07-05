@@ -9,6 +9,51 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      analytics_events: {
+        Row: {
+          business_id: string | null
+          created_at: string
+          event_data: Json | null
+          event_name: string
+          event_type: string
+          id: string
+          ip_address: unknown | null
+          page_url: string | null
+          referrer: string | null
+          session_id: string | null
+          user_agent: string | null
+          user_id: string
+        }
+        Insert: {
+          business_id?: string | null
+          created_at?: string
+          event_data?: Json | null
+          event_name: string
+          event_type: string
+          id?: string
+          ip_address?: unknown | null
+          page_url?: string | null
+          referrer?: string | null
+          session_id?: string | null
+          user_agent?: string | null
+          user_id: string
+        }
+        Update: {
+          business_id?: string | null
+          created_at?: string
+          event_data?: Json | null
+          event_name?: string
+          event_type?: string
+          id?: string
+          ip_address?: unknown | null
+          page_url?: string | null
+          referrer?: string | null
+          session_id?: string | null
+          user_agent?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       assets: {
         Row: {
           asset_name: string
@@ -417,6 +462,63 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      data_exports: {
+        Row: {
+          business_id: string | null
+          completed_at: string | null
+          data_source: string
+          error_message: string | null
+          expires_at: string | null
+          export_format: string
+          export_name: string
+          export_type: string
+          file_size_bytes: number | null
+          file_url: string | null
+          filters: Json | null
+          id: string
+          record_count: number | null
+          requested_at: string
+          status: string
+          user_id: string
+        }
+        Insert: {
+          business_id?: string | null
+          completed_at?: string | null
+          data_source: string
+          error_message?: string | null
+          expires_at?: string | null
+          export_format?: string
+          export_name: string
+          export_type: string
+          file_size_bytes?: number | null
+          file_url?: string | null
+          filters?: Json | null
+          id?: string
+          record_count?: number | null
+          requested_at?: string
+          status?: string
+          user_id: string
+        }
+        Update: {
+          business_id?: string | null
+          completed_at?: string | null
+          data_source?: string
+          error_message?: string | null
+          expires_at?: string | null
+          export_format?: string
+          export_name?: string
+          export_type?: string
+          file_size_bytes?: number | null
+          file_url?: string | null
+          filters?: Json | null
+          id?: string
+          record_count?: number | null
+          requested_at?: string
+          status?: string
+          user_id?: string
+        }
+        Relationships: []
       }
       debts: {
         Row: {
@@ -993,6 +1095,107 @@ export type Database = {
         }
         Relationships: []
       }
+      kpi_values: {
+        Row: {
+          achievement_percentage: number | null
+          actual_value: number
+          calculation_date: string
+          created_at: string
+          id: string
+          kpi_id: string
+          notes: string | null
+          period_end: string
+          period_start: string
+          target_value: number | null
+        }
+        Insert: {
+          achievement_percentage?: number | null
+          actual_value: number
+          calculation_date?: string
+          created_at?: string
+          id?: string
+          kpi_id: string
+          notes?: string | null
+          period_end: string
+          period_start: string
+          target_value?: number | null
+        }
+        Update: {
+          achievement_percentage?: number | null
+          actual_value?: number
+          calculation_date?: string
+          created_at?: string
+          id?: string
+          kpi_id?: string
+          notes?: string | null
+          period_end?: string
+          period_start?: string
+          target_value?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "kpi_values_kpi_id_fkey"
+            columns: ["kpi_id"]
+            isOneToOne: false
+            referencedRelation: "kpis"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      kpis: {
+        Row: {
+          business_id: string | null
+          calculation_method: string
+          created_at: string
+          data_source: string | null
+          display_order: number | null
+          id: string
+          is_active: boolean
+          kpi_category: string
+          kpi_description: string | null
+          kpi_name: string
+          kpi_type: string
+          target_period: string
+          target_value: number | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          business_id?: string | null
+          calculation_method: string
+          created_at?: string
+          data_source?: string | null
+          display_order?: number | null
+          id?: string
+          is_active?: boolean
+          kpi_category: string
+          kpi_description?: string | null
+          kpi_name: string
+          kpi_type?: string
+          target_period?: string
+          target_value?: number | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          business_id?: string | null
+          calculation_method?: string
+          created_at?: string
+          data_source?: string | null
+          display_order?: number | null
+          id?: string
+          is_active?: boolean
+          kpi_category?: string
+          kpi_description?: string | null
+          kpi_name?: string
+          kpi_type?: string
+          target_period?: string
+          target_value?: number | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       leads: {
         Row: {
           assigned_to: string | null
@@ -1279,6 +1482,51 @@ export type Database = {
           id?: string
           message_type?: string
           sender_id?: string
+        }
+        Relationships: []
+      }
+      metrics: {
+        Row: {
+          business_id: string | null
+          created_at: string
+          id: string
+          metadata: Json | null
+          metric_category: string
+          metric_name: string
+          metric_unit: string | null
+          metric_value: number
+          period_end: string
+          period_start: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          business_id?: string | null
+          created_at?: string
+          id?: string
+          metadata?: Json | null
+          metric_category: string
+          metric_name: string
+          metric_unit?: string | null
+          metric_value: number
+          period_end: string
+          period_start: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          business_id?: string | null
+          created_at?: string
+          id?: string
+          metadata?: Json | null
+          metric_category?: string
+          metric_name?: string
+          metric_unit?: string | null
+          metric_value?: number
+          period_end?: string
+          period_start?: string
+          updated_at?: string
+          user_id?: string
         }
         Relationships: []
       }
@@ -2408,6 +2656,170 @@ export type Database = {
           },
         ]
       }
+      report_executions: {
+        Row: {
+          completed_at: string | null
+          error_message: string | null
+          execution_data: Json | null
+          execution_status: string
+          execution_time_ms: number | null
+          file_url: string | null
+          id: string
+          schedule_id: string | null
+          started_at: string
+          template_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          error_message?: string | null
+          execution_data?: Json | null
+          execution_status?: string
+          execution_time_ms?: number | null
+          file_url?: string | null
+          id?: string
+          schedule_id?: string | null
+          started_at?: string
+          template_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          error_message?: string | null
+          execution_data?: Json | null
+          execution_status?: string
+          execution_time_ms?: number | null
+          file_url?: string | null
+          id?: string
+          schedule_id?: string | null
+          started_at?: string
+          template_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "report_executions_schedule_id_fkey"
+            columns: ["schedule_id"]
+            isOneToOne: false
+            referencedRelation: "report_schedules"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "report_executions_template_id_fkey"
+            columns: ["template_id"]
+            isOneToOne: false
+            referencedRelation: "report_templates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      report_schedules: {
+        Row: {
+          business_id: string | null
+          created_at: string
+          delivery_method: string
+          frequency: string
+          id: string
+          is_active: boolean
+          last_run_at: string | null
+          next_run_at: string | null
+          recipients: string[] | null
+          schedule_config: Json
+          schedule_name: string
+          template_id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          business_id?: string | null
+          created_at?: string
+          delivery_method?: string
+          frequency: string
+          id?: string
+          is_active?: boolean
+          last_run_at?: string | null
+          next_run_at?: string | null
+          recipients?: string[] | null
+          schedule_config?: Json
+          schedule_name: string
+          template_id: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          business_id?: string | null
+          created_at?: string
+          delivery_method?: string
+          frequency?: string
+          id?: string
+          is_active?: boolean
+          last_run_at?: string | null
+          next_run_at?: string | null
+          recipients?: string[] | null
+          schedule_config?: Json
+          schedule_name?: string
+          template_id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "report_schedules_template_id_fkey"
+            columns: ["template_id"]
+            isOneToOne: false
+            referencedRelation: "report_templates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      report_templates: {
+        Row: {
+          business_id: string | null
+          chart_configs: Json | null
+          created_at: string
+          data_sources: string[]
+          filters: Json | null
+          id: string
+          is_active: boolean
+          is_public: boolean
+          report_type: string
+          template_config: Json
+          template_description: string | null
+          template_name: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          business_id?: string | null
+          chart_configs?: Json | null
+          created_at?: string
+          data_sources?: string[]
+          filters?: Json | null
+          id?: string
+          is_active?: boolean
+          is_public?: boolean
+          report_type: string
+          template_config?: Json
+          template_description?: string | null
+          template_name: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          business_id?: string | null
+          chart_configs?: Json | null
+          created_at?: string
+          data_sources?: string[]
+          filters?: Json | null
+          id?: string
+          is_active?: boolean
+          is_public?: boolean
+          report_type?: string
+          template_config?: Json
+          template_description?: string | null
+          template_name?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       sales_activities: {
         Row: {
           activity_type: string
@@ -2730,7 +3142,15 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      track_analytics_event: {
+        Args: {
+          p_event_type: string
+          p_event_name: string
+          p_event_data?: Json
+          p_business_id?: string
+        }
+        Returns: string
+      }
     }
     Enums: {
       [_ in never]: never
