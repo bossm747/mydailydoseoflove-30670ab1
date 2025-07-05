@@ -11,6 +11,7 @@ import AssetRegistry from "@/components/assets/AssetRegistry";
 import DebtTracker from "@/components/debts/DebtTracker";
 import MoodSharing from "@/components/mood/MoodSharing";
 import FinancialForecasting from "@/components/forecasting/FinancialForecasting";
+import CustomReports from "@/components/reports/CustomReports";
 import { useState } from "react";
 
 const Index = () => {
@@ -30,6 +31,8 @@ const Index = () => {
         return <DebtTracker />;
       case 'forecasting':
         return <FinancialForecasting />;
+      case 'reports':
+        return <CustomReports />;
       case 'memories':
         return <MemoryGallery />;
       case 'mood':

@@ -31,7 +31,6 @@ interface MoodShare {
   location?: string;
   is_private: boolean;
   created_at: string;
-  profiles?: { first_name: string };
 }
 
 export default function MoodSharing() {
@@ -45,10 +44,7 @@ export default function MoodSharing() {
     
     const { data, error } = await supabase
       .from('mood_shares')
-      .select(`
-        *,
-        profiles(first_name)
-      `)
+      .select('*')
       .order('created_at', { ascending: false })
       .limit(20);
 

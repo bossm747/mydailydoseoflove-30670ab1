@@ -16,7 +16,13 @@ export default function Navigation({ activeTab, onTabChange }: NavigationProps) 
   const navItems = [
     { id: 'dashboard', label: 'Dashboard', icon: Home },
     { id: 'finance', label: 'Finance', icon: DollarSign },
+    { id: 'banking', label: 'Banking', icon: DollarSign },
+    { id: 'assets', label: 'Assets', icon: Home },
+    { id: 'debts', label: 'Debts', icon: DollarSign },
+    { id: 'forecasting', label: 'Forecasts', icon: Calendar },
+    { id: 'reports', label: 'Reports', icon: Calendar },
     { id: 'memories', label: 'Memories', icon: Heart },
+    { id: 'mood', label: 'Mood', icon: Heart },
     { id: 'business', label: 'Business', icon: Calendar },
     { id: 'messages', label: 'Messages', icon: MessageCircle },
     { id: 'settings', label: 'Settings', icon: Settings },
