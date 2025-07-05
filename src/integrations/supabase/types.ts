@@ -9,6 +9,219 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      assets: {
+        Row: {
+          asset_name: string
+          asset_type: string
+          condition: string | null
+          created_at: string
+          depreciation_rate: number | null
+          description: string | null
+          documents: Json | null
+          estimated_value: number
+          id: string
+          insurance_value: number | null
+          location: string | null
+          purchase_date: string | null
+          purchase_price: number | null
+          serial_number: string | null
+          tags: string[] | null
+          updated_at: string
+          user_id: string
+          warranty_expiry: string | null
+        }
+        Insert: {
+          asset_name: string
+          asset_type: string
+          condition?: string | null
+          created_at?: string
+          depreciation_rate?: number | null
+          description?: string | null
+          documents?: Json | null
+          estimated_value: number
+          id?: string
+          insurance_value?: number | null
+          location?: string | null
+          purchase_date?: string | null
+          purchase_price?: number | null
+          serial_number?: string | null
+          tags?: string[] | null
+          updated_at?: string
+          user_id: string
+          warranty_expiry?: string | null
+        }
+        Update: {
+          asset_name?: string
+          asset_type?: string
+          condition?: string | null
+          created_at?: string
+          depreciation_rate?: number | null
+          description?: string | null
+          documents?: Json | null
+          estimated_value?: number
+          id?: string
+          insurance_value?: number | null
+          location?: string | null
+          purchase_date?: string | null
+          purchase_price?: number | null
+          serial_number?: string | null
+          tags?: string[] | null
+          updated_at?: string
+          user_id?: string
+          warranty_expiry?: string | null
+        }
+        Relationships: []
+      }
+      bank_accounts: {
+        Row: {
+          account_name: string
+          account_number_masked: string | null
+          account_type: string
+          created_at: string
+          credit_limit: number | null
+          currency: string | null
+          current_balance: number
+          id: string
+          institution_name: string
+          interest_rate: number | null
+          is_active: boolean | null
+          last_updated: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          account_name: string
+          account_number_masked?: string | null
+          account_type: string
+          created_at?: string
+          credit_limit?: number | null
+          currency?: string | null
+          current_balance?: number
+          id?: string
+          institution_name: string
+          interest_rate?: number | null
+          is_active?: boolean | null
+          last_updated?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          account_name?: string
+          account_number_masked?: string | null
+          account_type?: string
+          created_at?: string
+          credit_limit?: number | null
+          currency?: string | null
+          current_balance?: number
+          id?: string
+          institution_name?: string
+          interest_rate?: number | null
+          is_active?: boolean | null
+          last_updated?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      custom_reports: {
+        Row: {
+          chart_type: string | null
+          created_at: string
+          date_range: string | null
+          filters: Json
+          id: string
+          is_scheduled: boolean | null
+          report_name: string
+          report_type: string
+          schedule_frequency: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          chart_type?: string | null
+          created_at?: string
+          date_range?: string | null
+          filters: Json
+          id?: string
+          is_scheduled?: boolean | null
+          report_name: string
+          report_type: string
+          schedule_frequency?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          chart_type?: string | null
+          created_at?: string
+          date_range?: string | null
+          filters?: Json
+          id?: string
+          is_scheduled?: boolean | null
+          report_name?: string
+          report_type?: string
+          schedule_frequency?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      debts: {
+        Row: {
+          auto_pay: boolean | null
+          created_at: string
+          creditor_name: string
+          current_balance: number
+          debt_name: string
+          debt_type: string
+          due_date: string | null
+          id: string
+          interest_rate: number
+          is_active: boolean | null
+          maturity_date: string | null
+          minimum_payment: number | null
+          original_amount: number
+          payment_frequency: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          auto_pay?: boolean | null
+          created_at?: string
+          creditor_name: string
+          current_balance: number
+          debt_name: string
+          debt_type: string
+          due_date?: string | null
+          id?: string
+          interest_rate: number
+          is_active?: boolean | null
+          maturity_date?: string | null
+          minimum_payment?: number | null
+          original_amount: number
+          payment_frequency?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          auto_pay?: boolean | null
+          created_at?: string
+          creditor_name?: string
+          current_balance?: number
+          debt_name?: string
+          debt_type?: string
+          due_date?: string | null
+          id?: string
+          interest_rate?: number
+          is_active?: boolean | null
+          maturity_date?: string | null
+          minimum_payment?: number | null
+          original_amount?: number
+          payment_frequency?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       events: {
         Row: {
           created_at: string
@@ -45,6 +258,51 @@ export type Database = {
           start_date?: string
           title?: string
           updated_at?: string
+        }
+        Relationships: []
+      }
+      financial_forecasts: {
+        Row: {
+          base_amount: number
+          category: string | null
+          created_at: string
+          end_date: string
+          forecast_period: string
+          forecast_type: string
+          growth_rate: number | null
+          id: string
+          notes: string | null
+          start_date: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          base_amount: number
+          category?: string | null
+          created_at?: string
+          end_date: string
+          forecast_period: string
+          forecast_type: string
+          growth_rate?: number | null
+          id?: string
+          notes?: string | null
+          start_date: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          base_amount?: number
+          category?: string | null
+          created_at?: string
+          end_date?: string
+          forecast_period?: string
+          forecast_type?: string
+          growth_rate?: number | null
+          id?: string
+          notes?: string | null
+          start_date?: string
+          updated_at?: string
+          user_id?: string
         }
         Relationships: []
       }
@@ -105,6 +363,42 @@ export type Database = {
           id?: string
           message_type?: string
           sender_id?: string
+        }
+        Relationships: []
+      }
+      mood_shares: {
+        Row: {
+          created_at: string
+          expires_at: string | null
+          id: string
+          intensity: number
+          is_private: boolean | null
+          location: string | null
+          mood: string
+          note: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          intensity?: number
+          is_private?: boolean | null
+          location?: string | null
+          mood: string
+          note?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          intensity?: number
+          is_private?: boolean | null
+          location?: string | null
+          mood?: string
+          note?: string | null
+          user_id?: string
         }
         Relationships: []
       }
