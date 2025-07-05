@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Heart, Home, DollarSign, Calendar, MessageCircle, Settings, Menu, LogOut } from "lucide-react";
+import { Heart, Home, DollarSign, Calendar, MessageCircle, Settings, Menu, LogOut, TrendingUp, Users, UserCheck } from "lucide-react";
 import { useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
@@ -16,6 +16,9 @@ export default function Navigation({ activeTab, onTabChange }: NavigationProps) 
 
   const navItems = [
     { id: 'dashboard', label: 'Dashboard', icon: Home },
+    { id: 'sales', label: 'Sales', icon: TrendingUp },
+    { id: 'customers', label: 'Customers', icon: Users },
+    { id: 'leads', label: 'Leads', icon: UserCheck },
     { id: 'finance', label: 'Finance', icon: DollarSign },
     { id: 'banking', label: 'Banking', icon: DollarSign },
     { id: 'assets', label: 'Assets', icon: Home },

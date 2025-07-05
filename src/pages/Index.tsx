@@ -13,6 +13,9 @@ import MoodSharing from "@/components/mood/MoodSharing";
 import FinancialForecasting from "@/components/forecasting/FinancialForecasting";
 import CustomReports from "@/components/reports/CustomReports";
 import BusinessManager from "@/components/business/BusinessManager";
+import SalesDashboard from "@/components/sales/SalesDashboard";
+import CustomerManager from "@/components/sales/CustomerManager";
+import LeadsManager from "@/components/sales/LeadsManager";
 import { useState } from "react";
 
 const Index = () => {
@@ -22,6 +25,12 @@ const Index = () => {
     switch (activeTab) {
       case 'dashboard':
         return <Dashboard />;
+      case 'sales':
+        return <SalesDashboard />;
+      case 'customers':
+        return <CustomerManager />;
+      case 'leads':
+        return <LeadsManager />;
       case 'finance':
         return <FinanceDashboard />;
       case 'banking':
