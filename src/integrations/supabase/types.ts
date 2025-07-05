@@ -242,6 +242,45 @@ export type Database = {
         }
         Relationships: []
       }
+      currencies: {
+        Row: {
+          created_at: string
+          currency_code: string
+          currency_name: string
+          currency_symbol: string
+          decimal_places: number
+          id: string
+          is_active: boolean
+          is_base_currency: boolean
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          currency_code: string
+          currency_name: string
+          currency_symbol: string
+          decimal_places?: number
+          id?: string
+          is_active?: boolean
+          is_base_currency?: boolean
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          currency_code?: string
+          currency_name?: string
+          currency_symbol?: string
+          decimal_places?: number
+          id?: string
+          is_active?: boolean
+          is_base_currency?: boolean
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       custom_reports: {
         Row: {
           business_id: string | null
@@ -595,6 +634,45 @@ export type Database = {
         }
         Relationships: []
       }
+      exchange_rates: {
+        Row: {
+          created_at: string
+          exchange_rate: number
+          from_currency: string
+          id: string
+          is_active: boolean
+          rate_date: string
+          source: string | null
+          to_currency: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          exchange_rate: number
+          from_currency: string
+          id?: string
+          is_active?: boolean
+          rate_date?: string
+          source?: string | null
+          to_currency: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          exchange_rate?: number
+          from_currency?: string
+          id?: string
+          is_active?: boolean
+          rate_date?: string
+          source?: string | null
+          to_currency?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       financial_forecasts: {
         Row: {
           base_amount: number
@@ -783,6 +861,137 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      invoice_items: {
+        Row: {
+          created_at: string
+          description: string | null
+          discount_rate: number | null
+          id: string
+          invoice_id: string
+          item_name: string
+          line_total: number
+          quantity: number
+          sort_order: number | null
+          tax_rate: number | null
+          unit_price: number
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          discount_rate?: number | null
+          id?: string
+          invoice_id: string
+          item_name: string
+          line_total?: number
+          quantity?: number
+          sort_order?: number | null
+          tax_rate?: number | null
+          unit_price?: number
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          discount_rate?: number | null
+          id?: string
+          invoice_id?: string
+          item_name?: string
+          line_total?: number
+          quantity?: number
+          sort_order?: number | null
+          tax_rate?: number | null
+          unit_price?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "invoice_items_invoice_id_fkey"
+            columns: ["invoice_id"]
+            isOneToOne: false
+            referencedRelation: "invoices"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      invoices: {
+        Row: {
+          balance_due: number
+          business_id: string | null
+          created_at: string
+          currency: string
+          customer_id: string | null
+          discount_amount: number
+          due_date: string
+          id: string
+          invoice_date: string
+          invoice_number: string
+          invoice_template: string | null
+          notes: string | null
+          paid_amount: number
+          paid_at: string | null
+          payment_terms: string | null
+          sent_at: string | null
+          status: string
+          subtotal: number
+          tax_amount: number
+          terms_conditions: string | null
+          total_amount: number
+          updated_at: string
+          user_id: string
+          viewed_at: string | null
+        }
+        Insert: {
+          balance_due?: number
+          business_id?: string | null
+          created_at?: string
+          currency?: string
+          customer_id?: string | null
+          discount_amount?: number
+          due_date: string
+          id?: string
+          invoice_date?: string
+          invoice_number: string
+          invoice_template?: string | null
+          notes?: string | null
+          paid_amount?: number
+          paid_at?: string | null
+          payment_terms?: string | null
+          sent_at?: string | null
+          status?: string
+          subtotal?: number
+          tax_amount?: number
+          terms_conditions?: string | null
+          total_amount?: number
+          updated_at?: string
+          user_id: string
+          viewed_at?: string | null
+        }
+        Update: {
+          balance_due?: number
+          business_id?: string | null
+          created_at?: string
+          currency?: string
+          customer_id?: string | null
+          discount_amount?: number
+          due_date?: string
+          id?: string
+          invoice_date?: string
+          invoice_number?: string
+          invoice_template?: string | null
+          notes?: string | null
+          paid_amount?: number
+          paid_at?: string | null
+          payment_terms?: string | null
+          sent_at?: string | null
+          status?: string
+          subtotal?: number
+          tax_amount?: number
+          terms_conditions?: string | null
+          total_amount?: number
+          updated_at?: string
+          user_id?: string
+          viewed_at?: string | null
+        }
+        Relationships: []
       }
       leads: {
         Row: {
@@ -1254,6 +1463,132 @@ export type Database = {
             columns: ["pipeline_id"]
             isOneToOne: false
             referencedRelation: "sales_pipeline"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      payment_methods: {
+        Row: {
+          account_details: Json | null
+          business_id: string | null
+          created_at: string
+          fees: Json | null
+          id: string
+          is_active: boolean
+          is_default: boolean
+          method_name: string
+          method_type: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          account_details?: Json | null
+          business_id?: string | null
+          created_at?: string
+          fees?: Json | null
+          id?: string
+          is_active?: boolean
+          is_default?: boolean
+          method_name: string
+          method_type: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          account_details?: Json | null
+          business_id?: string | null
+          created_at?: string
+          fees?: Json | null
+          id?: string
+          is_active?: boolean
+          is_default?: boolean
+          method_name?: string
+          method_type?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      payments: {
+        Row: {
+          amount: number
+          business_id: string | null
+          created_at: string
+          currency: string
+          customer_id: string | null
+          id: string
+          invoice_id: string | null
+          net_amount: number
+          notes: string | null
+          payment_date: string
+          payment_gateway_response: Json | null
+          payment_method_id: string | null
+          payment_method_type: string
+          payment_number: string
+          processed_at: string | null
+          reference_number: string | null
+          status: string
+          transaction_fee: number | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          business_id?: string | null
+          created_at?: string
+          currency?: string
+          customer_id?: string | null
+          id?: string
+          invoice_id?: string | null
+          net_amount: number
+          notes?: string | null
+          payment_date?: string
+          payment_gateway_response?: Json | null
+          payment_method_id?: string | null
+          payment_method_type: string
+          payment_number: string
+          processed_at?: string | null
+          reference_number?: string | null
+          status?: string
+          transaction_fee?: number | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          business_id?: string | null
+          created_at?: string
+          currency?: string
+          customer_id?: string | null
+          id?: string
+          invoice_id?: string | null
+          net_amount?: number
+          notes?: string | null
+          payment_date?: string
+          payment_gateway_response?: Json | null
+          payment_method_id?: string | null
+          payment_method_type?: string
+          payment_number?: string
+          processed_at?: string | null
+          reference_number?: string | null
+          status?: string
+          transaction_fee?: number | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payments_invoice_id_fkey"
+            columns: ["invoice_id"]
+            isOneToOne: false
+            referencedRelation: "invoices"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payments_payment_method_id_fkey"
+            columns: ["payment_method_id"]
+            isOneToOne: false
+            referencedRelation: "payment_methods"
             referencedColumns: ["id"]
           },
         ]
@@ -2216,6 +2551,51 @@ export type Database = {
           priority?: string
           status?: string
           title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      tax_settings: {
+        Row: {
+          applies_to: string
+          business_id: string | null
+          created_at: string
+          description: string | null
+          id: string
+          is_active: boolean
+          is_compound: boolean
+          tax_name: string
+          tax_rate: number
+          tax_type: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          applies_to?: string
+          business_id?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          is_compound?: boolean
+          tax_name: string
+          tax_rate: number
+          tax_type: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          applies_to?: string
+          business_id?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          is_compound?: boolean
+          tax_name?: string
+          tax_rate?: number
+          tax_type?: string
           updated_at?: string
           user_id?: string
         }

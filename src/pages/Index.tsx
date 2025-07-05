@@ -25,6 +25,8 @@ import ProductCatalog from "@/components/inventory/ProductCatalog";
 import InventoryManager from "@/components/inventory/InventoryManager";
 import { ProjectManager } from "@/components/projects/ProjectManager";
 import { TaskManager } from "@/components/tasks/TaskManager";
+import { InvoiceManager } from "@/components/invoices/InvoiceManager";
+import { PaymentManager } from "@/components/payments/PaymentManager";
 import { useState } from "react";
 
 const Index = () => {
@@ -70,6 +72,10 @@ const Index = () => {
         return <ProjectManager />;
       case 'tasks':
         return <TaskManager />;
+      case 'invoices':
+        return <InvoiceManager />;
+      case 'payments':
+        return <PaymentManager />;
       case 'memories':
         return <MemoryGallery />;
       case 'mood':
