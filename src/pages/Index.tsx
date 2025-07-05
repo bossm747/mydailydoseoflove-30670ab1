@@ -21,6 +21,8 @@ import PayrollManager from "@/components/hr/PayrollManager";
 import LeaveManager from "@/components/hr/LeaveManager";
 import PerformanceReviews from "@/components/hr/PerformanceReviews";
 import TimeTracker from "@/components/hr/TimeTracker";
+import ProductCatalog from "@/components/inventory/ProductCatalog";
+import InventoryManager from "@/components/inventory/InventoryManager";
 import { useState } from "react";
 
 const Index = () => {
@@ -44,8 +46,10 @@ const Index = () => {
         return <LeaveManager />;
       case 'reviews':
         return <PerformanceReviews />;
-      case 'time-tracker':
-        return <TimeTracker />;
+      case 'products':
+        return <ProductCatalog />;
+      case 'inventory':
+        return <InventoryManager />;
       case 'finance':
         return <FinanceDashboard />;
       case 'banking':

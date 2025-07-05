@@ -643,6 +643,147 @@ export type Database = {
         }
         Relationships: []
       }
+      inventory: {
+        Row: {
+          available_stock: number | null
+          business_id: string | null
+          created_at: string
+          current_stock: number | null
+          id: string
+          incoming_stock: number | null
+          last_counted_at: string | null
+          last_counted_by: string | null
+          location_name: string | null
+          notes: string | null
+          product_id: string
+          reserved_stock: number | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          available_stock?: number | null
+          business_id?: string | null
+          created_at?: string
+          current_stock?: number | null
+          id?: string
+          incoming_stock?: number | null
+          last_counted_at?: string | null
+          last_counted_by?: string | null
+          location_name?: string | null
+          notes?: string | null
+          product_id: string
+          reserved_stock?: number | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          available_stock?: number | null
+          business_id?: string | null
+          created_at?: string
+          current_stock?: number | null
+          id?: string
+          incoming_stock?: number | null
+          last_counted_at?: string | null
+          last_counted_by?: string | null
+          location_name?: string | null
+          notes?: string | null
+          product_id?: string
+          reserved_stock?: number | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "inventory_business_id_fkey"
+            columns: ["business_id"]
+            isOneToOne: false
+            referencedRelation: "businesses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "inventory_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      inventory_transactions: {
+        Row: {
+          business_id: string | null
+          created_at: string
+          created_by: string
+          id: string
+          location_name: string | null
+          notes: string | null
+          product_id: string
+          quantity_change: number
+          reason: string | null
+          stock_after: number
+          stock_before: number
+          total_cost: number | null
+          transaction_date: string | null
+          transaction_reference: string | null
+          transaction_type: string
+          unit_cost: number | null
+          user_id: string
+        }
+        Insert: {
+          business_id?: string | null
+          created_at?: string
+          created_by: string
+          id?: string
+          location_name?: string | null
+          notes?: string | null
+          product_id: string
+          quantity_change: number
+          reason?: string | null
+          stock_after: number
+          stock_before: number
+          total_cost?: number | null
+          transaction_date?: string | null
+          transaction_reference?: string | null
+          transaction_type: string
+          unit_cost?: number | null
+          user_id: string
+        }
+        Update: {
+          business_id?: string | null
+          created_at?: string
+          created_by?: string
+          id?: string
+          location_name?: string | null
+          notes?: string | null
+          product_id?: string
+          quantity_change?: number
+          reason?: string | null
+          stock_after?: number
+          stock_before?: number
+          total_cost?: number | null
+          transaction_date?: string | null
+          transaction_reference?: string | null
+          transaction_type?: string
+          unit_cost?: number | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "inventory_transactions_business_id_fkey"
+            columns: ["business_id"]
+            isOneToOne: false
+            referencedRelation: "businesses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "inventory_transactions_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       leads: {
         Row: {
           assigned_to: string | null
@@ -1361,6 +1502,174 @@ export type Database = {
           },
         ]
       }
+      product_categories: {
+        Row: {
+          business_id: string | null
+          category_code: string | null
+          category_name: string
+          created_at: string
+          description: string | null
+          id: string
+          is_active: boolean | null
+          parent_category_id: string | null
+          sort_order: number | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          business_id?: string | null
+          category_code?: string | null
+          category_name: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean | null
+          parent_category_id?: string | null
+          sort_order?: number | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          business_id?: string | null
+          category_code?: string | null
+          category_name?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean | null
+          parent_category_id?: string | null
+          sort_order?: number | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "product_categories_business_id_fkey"
+            columns: ["business_id"]
+            isOneToOne: false
+            referencedRelation: "businesses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "product_categories_parent_category_id_fkey"
+            columns: ["parent_category_id"]
+            isOneToOne: false
+            referencedRelation: "product_categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      products: {
+        Row: {
+          barcode: string | null
+          business_id: string | null
+          category_id: string | null
+          cost_price: number | null
+          created_at: string
+          custom_fields: Json | null
+          description: string | null
+          dimensions: Json | null
+          id: string
+          images: Json | null
+          is_active: boolean | null
+          is_purchasable: boolean | null
+          is_sellable: boolean | null
+          is_trackable: boolean | null
+          max_stock_level: number | null
+          min_stock_level: number | null
+          product_code: string
+          product_name: string
+          product_type: string | null
+          reorder_point: number | null
+          selling_price: number | null
+          sku: string | null
+          supplier_info: Json | null
+          tags: string[] | null
+          tax_rate: number | null
+          unit_of_measure: string | null
+          updated_at: string
+          user_id: string
+          weight: number | null
+        }
+        Insert: {
+          barcode?: string | null
+          business_id?: string | null
+          category_id?: string | null
+          cost_price?: number | null
+          created_at?: string
+          custom_fields?: Json | null
+          description?: string | null
+          dimensions?: Json | null
+          id?: string
+          images?: Json | null
+          is_active?: boolean | null
+          is_purchasable?: boolean | null
+          is_sellable?: boolean | null
+          is_trackable?: boolean | null
+          max_stock_level?: number | null
+          min_stock_level?: number | null
+          product_code: string
+          product_name: string
+          product_type?: string | null
+          reorder_point?: number | null
+          selling_price?: number | null
+          sku?: string | null
+          supplier_info?: Json | null
+          tags?: string[] | null
+          tax_rate?: number | null
+          unit_of_measure?: string | null
+          updated_at?: string
+          user_id: string
+          weight?: number | null
+        }
+        Update: {
+          barcode?: string | null
+          business_id?: string | null
+          category_id?: string | null
+          cost_price?: number | null
+          created_at?: string
+          custom_fields?: Json | null
+          description?: string | null
+          dimensions?: Json | null
+          id?: string
+          images?: Json | null
+          is_active?: boolean | null
+          is_purchasable?: boolean | null
+          is_sellable?: boolean | null
+          is_trackable?: boolean | null
+          max_stock_level?: number | null
+          min_stock_level?: number | null
+          product_code?: string
+          product_name?: string
+          product_type?: string | null
+          reorder_point?: number | null
+          selling_price?: number | null
+          sku?: string | null
+          supplier_info?: Json | null
+          tags?: string[] | null
+          tax_rate?: number | null
+          unit_of_measure?: string | null
+          updated_at?: string
+          user_id?: string
+          weight?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "products_business_id_fkey"
+            columns: ["business_id"]
+            isOneToOne: false
+            referencedRelation: "businesses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "products_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "product_categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -1414,6 +1723,199 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      project_tasks: {
+        Row: {
+          actual_end_date: string | null
+          actual_hours: number | null
+          actual_start_date: string | null
+          assigned_to: string | null
+          business_id: string | null
+          completion_percentage: number | null
+          created_at: string
+          dependencies: string[] | null
+          description: string | null
+          due_date: string | null
+          estimated_hours: number | null
+          id: string
+          parent_task_id: string | null
+          priority: string | null
+          project_id: string
+          sort_order: number | null
+          start_date: string | null
+          status: string | null
+          tags: string[] | null
+          task_name: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          actual_end_date?: string | null
+          actual_hours?: number | null
+          actual_start_date?: string | null
+          assigned_to?: string | null
+          business_id?: string | null
+          completion_percentage?: number | null
+          created_at?: string
+          dependencies?: string[] | null
+          description?: string | null
+          due_date?: string | null
+          estimated_hours?: number | null
+          id?: string
+          parent_task_id?: string | null
+          priority?: string | null
+          project_id: string
+          sort_order?: number | null
+          start_date?: string | null
+          status?: string | null
+          tags?: string[] | null
+          task_name: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          actual_end_date?: string | null
+          actual_hours?: number | null
+          actual_start_date?: string | null
+          assigned_to?: string | null
+          business_id?: string | null
+          completion_percentage?: number | null
+          created_at?: string
+          dependencies?: string[] | null
+          description?: string | null
+          due_date?: string | null
+          estimated_hours?: number | null
+          id?: string
+          parent_task_id?: string | null
+          priority?: string | null
+          project_id?: string
+          sort_order?: number | null
+          start_date?: string | null
+          status?: string | null
+          tags?: string[] | null
+          task_name?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_tasks_business_id_fkey"
+            columns: ["business_id"]
+            isOneToOne: false
+            referencedRelation: "businesses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "project_tasks_parent_task_id_fkey"
+            columns: ["parent_task_id"]
+            isOneToOne: false
+            referencedRelation: "project_tasks"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "project_tasks_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      projects: {
+        Row: {
+          actual_cost: number | null
+          actual_end_date: string | null
+          actual_start_date: string | null
+          billing_method: string | null
+          budget: number | null
+          business_id: string | null
+          client_id: string | null
+          completion_percentage: number | null
+          created_at: string
+          custom_fields: Json | null
+          description: string | null
+          end_date: string | null
+          hourly_rate: number | null
+          id: string
+          is_active: boolean | null
+          priority: string | null
+          project_code: string
+          project_manager_id: string | null
+          project_name: string
+          start_date: string | null
+          status: string | null
+          tags: string[] | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          actual_cost?: number | null
+          actual_end_date?: string | null
+          actual_start_date?: string | null
+          billing_method?: string | null
+          budget?: number | null
+          business_id?: string | null
+          client_id?: string | null
+          completion_percentage?: number | null
+          created_at?: string
+          custom_fields?: Json | null
+          description?: string | null
+          end_date?: string | null
+          hourly_rate?: number | null
+          id?: string
+          is_active?: boolean | null
+          priority?: string | null
+          project_code: string
+          project_manager_id?: string | null
+          project_name: string
+          start_date?: string | null
+          status?: string | null
+          tags?: string[] | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          actual_cost?: number | null
+          actual_end_date?: string | null
+          actual_start_date?: string | null
+          billing_method?: string | null
+          budget?: number | null
+          business_id?: string | null
+          client_id?: string | null
+          completion_percentage?: number | null
+          created_at?: string
+          custom_fields?: Json | null
+          description?: string | null
+          end_date?: string | null
+          hourly_rate?: number | null
+          id?: string
+          is_active?: boolean | null
+          priority?: string | null
+          project_code?: string
+          project_manager_id?: string | null
+          project_name?: string
+          start_date?: string | null
+          status?: string | null
+          tags?: string[] | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "projects_business_id_fkey"
+            columns: ["business_id"]
+            isOneToOne: false
+            referencedRelation: "businesses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "projects_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "customers"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       quote_items: {
         Row: {

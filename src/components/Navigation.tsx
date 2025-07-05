@@ -24,6 +24,8 @@ export default function Navigation({ activeTab, onTabChange }: NavigationProps) 
     { id: 'leave', label: 'Leave', icon: Calendar },
     { id: 'reviews', label: 'Reviews', icon: TrendingUp },
     { id: 'time-tracker', label: 'Time Tracker', icon: Clock },
+    { id: 'products', label: 'Products', icon: Package },
+    { id: 'inventory', label: 'Inventory', icon: Package },
     { id: 'finance', label: 'Finance', icon: DollarSign },
     { id: 'banking', label: 'Banking', icon: DollarSign },
     { id: 'assets', label: 'Assets', icon: Home },
