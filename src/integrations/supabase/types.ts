@@ -108,31 +108,97 @@ export type Database = {
         }
         Relationships: []
       }
+      notifications: {
+        Row: {
+          action_url: string | null
+          category: string
+          created_at: string
+          id: string
+          is_read: boolean
+          message: string
+          metadata: Json | null
+          title: string
+          type: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          action_url?: string | null
+          category: string
+          created_at?: string
+          id?: string
+          is_read?: boolean
+          message: string
+          metadata?: Json | null
+          title: string
+          type?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          action_url?: string | null
+          category?: string
+          created_at?: string
+          id?: string
+          is_read?: boolean
+          message?: string
+          metadata?: Json | null
+          title?: string
+          type?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
+          business_name: string | null
+          business_type: string | null
           created_at: string
+          email_notifications: boolean | null
           first_name: string | null
           id: string
+          language: string | null
           last_name: string | null
+          marketing_emails: boolean | null
+          primary_currency: string | null
+          push_notifications: boolean | null
+          timezone: string | null
           updated_at: string
           user_id: string
         }
         Insert: {
           avatar_url?: string | null
+          business_name?: string | null
+          business_type?: string | null
           created_at?: string
+          email_notifications?: boolean | null
           first_name?: string | null
           id?: string
+          language?: string | null
           last_name?: string | null
+          marketing_emails?: boolean | null
+          primary_currency?: string | null
+          push_notifications?: boolean | null
+          timezone?: string | null
           updated_at?: string
           user_id: string
         }
         Update: {
           avatar_url?: string | null
+          business_name?: string | null
+          business_type?: string | null
           created_at?: string
+          email_notifications?: boolean | null
           first_name?: string | null
           id?: string
+          language?: string | null
           last_name?: string | null
+          marketing_emails?: boolean | null
+          primary_currency?: string | null
+          push_notifications?: boolean | null
+          timezone?: string | null
           updated_at?: string
           user_id?: string
         }

@@ -5,6 +5,7 @@ import MemoryGallery from "@/components/MemoryGallery";
 import BusinessHub from "@/components/BusinessHub";
 import MessagingHub from "@/components/MessagingHub";
 import SharedCalendar from "@/components/calendar/SharedCalendar";
+import UserSettings from "@/components/settings/UserSettings";
 import { useState } from "react";
 
 const Index = () => {
@@ -22,8 +23,8 @@ const Index = () => {
         return <BusinessHub />;
       case 'messages':
         return <MessagingHub />;
-      case 'calendar':
-        return <SharedCalendar />;
+      case 'settings':
+        return <UserSettings />;
       default:
         return <Dashboard />;
     }

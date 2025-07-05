@@ -19,7 +19,7 @@ export default function Navigation({ activeTab, onTabChange }: NavigationProps) 
     { id: 'memories', label: 'Memories', icon: Heart },
     { id: 'business', label: 'Business', icon: Calendar },
     { id: 'messages', label: 'Messages', icon: MessageCircle },
-    { id: 'calendar', label: 'Calendar', icon: Calendar },
+    { id: 'settings', label: 'Settings', icon: Settings },
   ];
 
   const handleSignOut = async () => {

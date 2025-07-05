@@ -78,18 +78,18 @@ export default function UserSettings() {
       }
 
       if (data) {
-        setProfile(data);
+        setProfile(data as any);
         setFormData({
           first_name: data.first_name || '',
           last_name: data.last_name || '',
-          business_name: data.business_name || '',
-          business_type: data.business_type || '',
-          primary_currency: data.primary_currency || 'PHP',
-          timezone: data.timezone || 'Asia/Manila',
-          language: data.language || 'en',
-          email_notifications: data.email_notifications ?? true,
-          push_notifications: data.push_notifications ?? true,
-          marketing_emails: data.marketing_emails ?? false
+          business_name: (data as any).business_name || '',
+          business_type: (data as any).business_type || '',
+          primary_currency: (data as any).primary_currency || 'PHP',
+          timezone: (data as any).timezone || 'Asia/Manila',
+          language: (data as any).language || 'en',
+          email_notifications: (data as any).email_notifications ?? true,
+          push_notifications: (data as any).push_notifications ?? true,
+          marketing_emails: (data as any).marketing_emails ?? false
         });
       }
     } catch (error) {
