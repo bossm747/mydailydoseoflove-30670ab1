@@ -50,6 +50,8 @@ const Index = () => {
         return <LeaveManager />;
       case 'reviews':
         return <PerformanceReviews />;
+      case 'time-tracker':
+        return <TimeTracker />;
       case 'products':
         return <ProductCatalog />;
       case 'inventory':

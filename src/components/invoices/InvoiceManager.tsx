@@ -12,6 +12,7 @@ import { useBusinessContext } from '@/contexts/BusinessContext';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { InvoiceForm } from './InvoiceForm';
+import { InvoiceStats } from './InvoiceStats';
 
 interface Invoice {
   id: string;
@@ -173,6 +174,9 @@ export const InvoiceManager: React.FC = () => {
           </DialogContent>
         </Dialog>
       </div>
+
+      {/* Invoice Statistics */}
+      <InvoiceStats invoices={invoices} />
 
       {/* Filters */}
       <div className="flex gap-4 items-center">
