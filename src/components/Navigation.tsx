@@ -3,6 +3,7 @@ import { Heart, Home, DollarSign, Calendar, MessageCircle, Settings, Menu, LogOu
 import { useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
+import { BusinessSelector } from "./business/BusinessSelector";
 
 interface NavigationProps {
   activeTab: string;
@@ -21,6 +22,7 @@ export default function Navigation({ activeTab, onTabChange }: NavigationProps) 
     { id: 'debts', label: 'Debts', icon: DollarSign },
     { id: 'forecasting', label: 'Forecasts', icon: Calendar },
     { id: 'reports', label: 'Reports', icon: Calendar },
+    { id: 'business-manager', label: 'Businesses', icon: Home },
     { id: 'memories', label: 'Memories', icon: Heart },
     { id: 'mood', label: 'Mood', icon: Heart },
     { id: 'business', label: 'Business', icon: Calendar },
@@ -52,6 +54,7 @@ export default function Navigation({ activeTab, onTabChange }: NavigationProps) 
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-1">
+            <BusinessSelector />
             {navItems.map((item) => {
               const Icon = item.icon;
               return (

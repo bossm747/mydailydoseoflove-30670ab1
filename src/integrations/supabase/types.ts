@@ -13,6 +13,7 @@ export type Database = {
         Row: {
           asset_name: string
           asset_type: string
+          business_id: string | null
           condition: string | null
           created_at: string
           depreciation_rate: number | null
@@ -33,6 +34,7 @@ export type Database = {
         Insert: {
           asset_name: string
           asset_type: string
+          business_id?: string | null
           condition?: string | null
           created_at?: string
           depreciation_rate?: number | null
@@ -53,6 +55,7 @@ export type Database = {
         Update: {
           asset_name?: string
           asset_type?: string
+          business_id?: string | null
           condition?: string | null
           created_at?: string
           depreciation_rate?: number | null
@@ -77,6 +80,7 @@ export type Database = {
           account_name: string
           account_number_masked: string | null
           account_type: string
+          business_id: string | null
           created_at: string
           credit_limit: number | null
           currency: string | null
@@ -93,6 +97,7 @@ export type Database = {
           account_name: string
           account_number_masked?: string | null
           account_type: string
+          business_id?: string | null
           created_at?: string
           credit_limit?: number | null
           currency?: string | null
@@ -109,6 +114,7 @@ export type Database = {
           account_name?: string
           account_number_masked?: string | null
           account_type?: string
+          business_id?: string | null
           created_at?: string
           credit_limit?: number | null
           currency?: string | null
@@ -123,8 +129,122 @@ export type Database = {
         }
         Relationships: []
       }
+      business_members: {
+        Row: {
+          business_id: string
+          created_at: string
+          id: string
+          invited_by: string | null
+          is_active: boolean | null
+          joined_at: string | null
+          permissions: Json | null
+          role: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          business_id: string
+          created_at?: string
+          id?: string
+          invited_by?: string | null
+          is_active?: boolean | null
+          joined_at?: string | null
+          permissions?: Json | null
+          role?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          business_id?: string
+          created_at?: string
+          id?: string
+          invited_by?: string | null
+          is_active?: boolean | null
+          joined_at?: string | null
+          permissions?: Json | null
+          role?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "business_members_business_id_fkey"
+            columns: ["business_id"]
+            isOneToOne: false
+            referencedRelation: "businesses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      businesses: {
+        Row: {
+          address: Json | null
+          business_name: string
+          business_type: string | null
+          created_at: string
+          description: string | null
+          email: string | null
+          founded_date: string | null
+          id: string
+          industry: string | null
+          is_active: boolean | null
+          logo_url: string | null
+          owner_id: string
+          phone: string | null
+          primary_currency: string | null
+          registration_number: string | null
+          tax_id: string | null
+          timezone: string | null
+          updated_at: string
+          website: string | null
+        }
+        Insert: {
+          address?: Json | null
+          business_name: string
+          business_type?: string | null
+          created_at?: string
+          description?: string | null
+          email?: string | null
+          founded_date?: string | null
+          id?: string
+          industry?: string | null
+          is_active?: boolean | null
+          logo_url?: string | null
+          owner_id: string
+          phone?: string | null
+          primary_currency?: string | null
+          registration_number?: string | null
+          tax_id?: string | null
+          timezone?: string | null
+          updated_at?: string
+          website?: string | null
+        }
+        Update: {
+          address?: Json | null
+          business_name?: string
+          business_type?: string | null
+          created_at?: string
+          description?: string | null
+          email?: string | null
+          founded_date?: string | null
+          id?: string
+          industry?: string | null
+          is_active?: boolean | null
+          logo_url?: string | null
+          owner_id?: string
+          phone?: string | null
+          primary_currency?: string | null
+          registration_number?: string | null
+          tax_id?: string | null
+          timezone?: string | null
+          updated_at?: string
+          website?: string | null
+        }
+        Relationships: []
+      }
       custom_reports: {
         Row: {
+          business_id: string | null
           chart_type: string | null
           created_at: string
           date_range: string | null
@@ -138,6 +258,7 @@ export type Database = {
           user_id: string
         }
         Insert: {
+          business_id?: string | null
           chart_type?: string | null
           created_at?: string
           date_range?: string | null
@@ -151,6 +272,7 @@ export type Database = {
           user_id: string
         }
         Update: {
+          business_id?: string | null
           chart_type?: string | null
           created_at?: string
           date_range?: string | null
@@ -168,6 +290,7 @@ export type Database = {
       debts: {
         Row: {
           auto_pay: boolean | null
+          business_id: string | null
           created_at: string
           creditor_name: string
           current_balance: number
@@ -186,6 +309,7 @@ export type Database = {
         }
         Insert: {
           auto_pay?: boolean | null
+          business_id?: string | null
           created_at?: string
           creditor_name: string
           current_balance: number
@@ -204,6 +328,7 @@ export type Database = {
         }
         Update: {
           auto_pay?: boolean | null
+          business_id?: string | null
           created_at?: string
           creditor_name?: string
           current_balance?: number
@@ -224,6 +349,7 @@ export type Database = {
       }
       events: {
         Row: {
+          business_id: string | null
           created_at: string
           created_by: string
           description: string | null
@@ -236,6 +362,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          business_id?: string | null
           created_at?: string
           created_by: string
           description?: string | null
@@ -248,6 +375,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          business_id?: string | null
           created_at?: string
           created_by?: string
           description?: string | null
@@ -264,6 +392,7 @@ export type Database = {
       financial_forecasts: {
         Row: {
           base_amount: number
+          business_id: string | null
           category: string | null
           created_at: string
           end_date: string
@@ -278,6 +407,7 @@ export type Database = {
         }
         Insert: {
           base_amount: number
+          business_id?: string | null
           category?: string | null
           created_at?: string
           end_date: string
@@ -292,6 +422,7 @@ export type Database = {
         }
         Update: {
           base_amount?: number
+          business_id?: string | null
           category?: string | null
           created_at?: string
           end_date?: string
@@ -501,6 +632,7 @@ export type Database = {
       tasks: {
         Row: {
           assigned_to: string | null
+          business_id: string | null
           created_at: string
           description: string | null
           due_date: string | null
@@ -513,6 +645,7 @@ export type Database = {
         }
         Insert: {
           assigned_to?: string | null
+          business_id?: string | null
           created_at?: string
           description?: string | null
           due_date?: string | null
@@ -525,6 +658,7 @@ export type Database = {
         }
         Update: {
           assigned_to?: string | null
+          business_id?: string | null
           created_at?: string
           description?: string | null
           due_date?: string | null
@@ -540,6 +674,7 @@ export type Database = {
       transactions: {
         Row: {
           amount: number
+          business_id: string | null
           category: string
           created_at: string
           description: string
@@ -551,6 +686,7 @@ export type Database = {
         }
         Insert: {
           amount: number
+          business_id?: string | null
           category: string
           created_at?: string
           description: string
@@ -562,6 +698,7 @@ export type Database = {
         }
         Update: {
           amount?: number
+          business_id?: string | null
           category?: string
           created_at?: string
           description?: string
