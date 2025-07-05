@@ -75,6 +75,12 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				}
 			},
+			boxShadow: {
+				'soft': '0 2px 10px -2px hsl(var(--primary) / 0.1)',
+				'medium': '0 8px 25px -5px hsl(var(--primary) / 0.15)',
+				'strong': '0 15px 35px -5px hsl(var(--primary) / 0.2)',
+				'glow': '0 0 30px hsl(var(--secondary) / 0.3)',
+			},
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',

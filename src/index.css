@@ -152,8 +152,7 @@ All colors MUST be HSL for consistency and theming.
   }
 
   .card-elegant {
-    @apply bg-card border border-border rounded-xl p-6;
-    box-shadow: var(--shadow-soft);
+    @apply bg-card border border-border rounded-xl p-6 shadow-soft;
     @apply hover:shadow-medium transition-shadow duration-300;
   }
 
