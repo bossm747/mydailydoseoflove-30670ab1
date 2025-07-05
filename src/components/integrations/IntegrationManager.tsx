@@ -368,7 +368,7 @@ export const IntegrationManager: React.FC = () => {
                     name="api_key"
                     type="password"
                     required
-                    defaultValue={editingIntegration?.configuration?.api_key}
+                    defaultValue={(editingIntegration?.configuration as any)?.api_key}
                     placeholder="Your API key"
                   />
                 </div>
@@ -378,7 +378,7 @@ export const IntegrationManager: React.FC = () => {
                     id="api_secret"
                     name="api_secret"
                     type="password"
-                    defaultValue={editingIntegration?.configuration?.api_secret}
+                    defaultValue={(editingIntegration?.configuration as any)?.api_secret}
                     placeholder="Your API secret"
                   />
                 </div>
@@ -390,7 +390,7 @@ export const IntegrationManager: React.FC = () => {
                   id="webhook_url"
                   name="webhook_url"
                   type="url"
-                  defaultValue={editingIntegration?.configuration?.webhook_url}
+                  defaultValue={(editingIntegration?.configuration as any)?.webhook_url}
                   placeholder="https://your-domain.com/webhook"
                 />
               </div>
