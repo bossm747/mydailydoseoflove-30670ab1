@@ -182,6 +182,51 @@ export type Database = {
         }
         Relationships: []
       }
+      audit_logs: {
+        Row: {
+          action: string
+          business_id: string | null
+          created_at: string
+          id: string
+          ip_address: unknown | null
+          new_values: Json | null
+          old_values: Json | null
+          record_id: string | null
+          session_id: string | null
+          table_name: string
+          user_agent: string | null
+          user_id: string
+        }
+        Insert: {
+          action: string
+          business_id?: string | null
+          created_at?: string
+          id?: string
+          ip_address?: unknown | null
+          new_values?: Json | null
+          old_values?: Json | null
+          record_id?: string | null
+          session_id?: string | null
+          table_name: string
+          user_agent?: string | null
+          user_id: string
+        }
+        Update: {
+          action?: string
+          business_id?: string | null
+          created_at?: string
+          id?: string
+          ip_address?: unknown | null
+          new_values?: Json | null
+          old_values?: Json | null
+          record_id?: string | null
+          session_id?: string | null
+          table_name?: string
+          user_agent?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       bank_accounts: {
         Row: {
           account_name: string
@@ -231,6 +276,66 @@ export type Database = {
           interest_rate?: number | null
           is_active?: boolean | null
           last_updated?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      bulk_operations: {
+        Row: {
+          business_id: string | null
+          completed_at: string | null
+          created_at: string
+          error_message: string | null
+          failed_records: number
+          id: string
+          operation_name: string
+          operation_type: string
+          parameters: Json | null
+          processed_records: number
+          results: Json | null
+          started_at: string | null
+          status: string
+          target_table: string
+          total_records: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          business_id?: string | null
+          completed_at?: string | null
+          created_at?: string
+          error_message?: string | null
+          failed_records?: number
+          id?: string
+          operation_name: string
+          operation_type: string
+          parameters?: Json | null
+          processed_records?: number
+          results?: Json | null
+          started_at?: string | null
+          status?: string
+          target_table: string
+          total_records?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          business_id?: string | null
+          completed_at?: string | null
+          created_at?: string
+          error_message?: string | null
+          failed_records?: number
+          id?: string
+          operation_name?: string
+          operation_type?: string
+          parameters?: Json | null
+          processed_records?: number
+          results?: Json | null
+          started_at?: string | null
+          status?: string
+          target_table?: string
+          total_records?: number
           updated_at?: string
           user_id?: string
         }
@@ -2271,6 +2376,36 @@ export type Database = {
           },
         ]
       }
+      performance_cache: {
+        Row: {
+          business_id: string | null
+          cache_data: Json
+          cache_key: string
+          created_at: string
+          expires_at: string
+          id: string
+          user_id: string | null
+        }
+        Insert: {
+          business_id?: string | null
+          cache_data: Json
+          cache_key: string
+          created_at?: string
+          expires_at: string
+          id?: string
+          user_id?: string | null
+        }
+        Update: {
+          business_id?: string | null
+          cache_data?: Json
+          cache_key?: string
+          created_at?: string
+          expires_at?: string
+          id?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       performance_reviews: {
         Row: {
           areas_for_improvement: string | null
@@ -3200,6 +3335,99 @@ export type Database = {
           },
         ]
       }
+      search_indexes: {
+        Row: {
+          business_id: string | null
+          content: string
+          id: string
+          indexed_at: string
+          metadata: Json | null
+          record_id: string
+          record_type: string
+          search_vector: unknown | null
+          table_name: string
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          business_id?: string | null
+          content: string
+          id?: string
+          indexed_at?: string
+          metadata?: Json | null
+          record_id: string
+          record_type: string
+          search_vector?: unknown | null
+          table_name: string
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          business_id?: string | null
+          content?: string
+          id?: string
+          indexed_at?: string
+          metadata?: Json | null
+          record_id?: string
+          record_type?: string
+          search_vector?: unknown | null
+          table_name?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      security_settings: {
+        Row: {
+          backup_codes: string[] | null
+          business_id: string | null
+          created_at: string
+          id: string
+          locked_until: string | null
+          login_attempts: number
+          password_changed_at: string | null
+          security_questions: Json | null
+          trusted_devices: Json | null
+          two_factor_enabled: boolean
+          two_factor_secret: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          backup_codes?: string[] | null
+          business_id?: string | null
+          created_at?: string
+          id?: string
+          locked_until?: string | null
+          login_attempts?: number
+          password_changed_at?: string | null
+          security_questions?: Json | null
+          trusted_devices?: Json | null
+          two_factor_enabled?: boolean
+          two_factor_secret?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          backup_codes?: string[] | null
+          business_id?: string | null
+          created_at?: string
+          id?: string
+          locked_until?: string | null
+          login_attempts?: number
+          password_changed_at?: string | null
+          security_questions?: Json | null
+          trusted_devices?: Json | null
+          two_factor_enabled?: boolean
+          two_factor_secret?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       tasks: {
         Row: {
           assigned_to: string | null
@@ -3526,6 +3754,21 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      clean_expired_cache: {
+        Args: Record<PropertyKey, never>
+        Returns: number
+      }
+      log_audit_event: {
+        Args: {
+          p_action: string
+          p_table_name: string
+          p_record_id?: string
+          p_old_values?: Json
+          p_new_values?: Json
+          p_business_id?: string
+        }
+        Returns: string
+      }
       process_webhook_event: {
         Args: {
           p_event_type: string
@@ -3539,6 +3782,19 @@ export type Database = {
           p_event_type: string
           p_event_name: string
           p_event_data?: Json
+          p_business_id?: string
+        }
+        Returns: string
+      }
+      update_search_index: {
+        Args: {
+          p_table_name: string
+          p_record_id: string
+          p_title: string
+          p_content: string
+          p_record_type: string
+          p_metadata?: Json
+          p_user_id?: string
           p_business_id?: string
         }
         Returns: string

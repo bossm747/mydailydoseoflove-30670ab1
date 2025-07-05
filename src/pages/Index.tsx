@@ -35,6 +35,10 @@ import { EmailTemplateManager } from "@/components/integrations/EmailTemplateMan
 import { FileUploadManager } from "@/components/integrations/FileUploadManager";
 import { WebhookManager } from "@/components/integrations/WebhookManager";
 import { IntegrationManager } from "@/components/integrations/IntegrationManager";
+import GlobalSearch from "@/components/search/GlobalSearch";
+import BulkOperations from "@/components/bulk/BulkOperations";
+import AdvancedSecurity from "@/components/security/AdvancedSecurity";
+import PerformanceMonitor from "@/components/performance/PerformanceMonitor";
 import { useState } from "react";
 
 const Index = () => {
@@ -100,6 +104,14 @@ const Index = () => {
         return <WebhookManager />;
       case 'integrations':
         return <IntegrationManager />;
+      case 'search':
+        return <GlobalSearch />;
+      case 'bulk':
+        return <BulkOperations />;
+      case 'security':
+        return <AdvancedSecurity />;
+      case 'performance':
+        return <PerformanceMonitor />;
       case 'memories':
         return <MemoryGallery />;
       case 'mood':
