@@ -326,7 +326,7 @@ export default function SalesPipelineManager() {
                               </Badge>
                             </div>
                             <p className="text-xs text-muted-foreground mb-2">
-                              {opportunity.company_name}
+                              {opportunity.status}
                             </p>
                             <p className="text-sm font-semibold text-green-600">
                               ₱{(opportunity.value || 0).toLocaleString()}

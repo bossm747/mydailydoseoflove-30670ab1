@@ -17,7 +17,6 @@ interface Opportunity {
   opportunity_name: string;
   customer_id: string;
   value: number;
-  currency: string;
   probability: number;
   stage: string;
   expected_close_date: string;
@@ -139,7 +138,7 @@ export default function OpportunityManager() {
 
   const filteredOpportunities = opportunities.filter(opportunity => {
     const matchesSearch = opportunity.opportunity_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         opportunity.company_name.toLowerCase().includes(searchTerm.toLowerCase());
+                         (opportunity.source || '').toLowerCase().includes(searchTerm.toLowerCase());
     const matchesFilter = filterStatus === 'all' || opportunity.status === filterStatus;
     return matchesSearch && matchesFilter;
   });
@@ -272,7 +271,7 @@ export default function OpportunityManager() {
                       <h3 className="font-semibold text-lg">{opportunity.opportunity_name}</h3>
                       {getStatusBadge(opportunity.status)}
                     </div>
-                    <p className="text-muted-foreground">{opportunity.company_name}</p>
+                    <p className="text-muted-foreground">Customer ID: {opportunity.customer_id}</p>
                   </div>
                   <div className="text-right">
                     <p className="text-2xl font-bold text-green-600">
@@ -287,7 +286,7 @@ export default function OpportunityManager() {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
                   <div className="flex items-center gap-2">
                     <User className="h-4 w-4 text-muted-foreground" />
-                    <span className="text-sm">{opportunity.contact_person}</span>
+                    <span className="text-sm">Assigned: {opportunity.assigned_to || 'Unassigned'}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Calendar className="h-4 w-4 text-muted-foreground" />
