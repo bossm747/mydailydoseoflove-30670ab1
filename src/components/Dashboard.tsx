@@ -62,28 +62,28 @@ export default function Dashboard() {
 
   const quickActions = [
     { 
-      label: "Add Transaction", 
+      label: "Financial Record", 
       icon: DollarSign, 
       gradient: "from-success to-success/80",
-      description: "Record income or expense"
+      description: "Business transactions PHP/AED"
     },
     { 
-      label: "Create Memory", 
+      label: "Archive Memory", 
       icon: Camera, 
       gradient: "from-secondary to-secondary-light",
-      description: "Save a special moment"
+      description: "Document important moments"
     },
     { 
-      label: "Add Task", 
+      label: "Business Task", 
       icon: CheckSquare, 
       gradient: "from-primary to-primary-light",
-      description: "Create business task"
+      description: "Manage operations efficiently"
     },
     { 
-      label: "Send Message", 
+      label: "Professional Message", 
       icon: MessageCircle, 
       gradient: "from-primary-lighter to-secondary-lighter",
-      description: "Chat with your partner"
+      description: "Business communication"
     },
   ];
 
@@ -92,17 +92,23 @@ export default function Dashboard() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-display font-bold gradient-text">
-            Welcome Back, {user?.user_metadata?.first_name || 'Partner'}!
+            {user?.user_metadata?.first_name === 'Marc' ? 'Welcome, Boss Marc' : user?.user_metadata?.first_name === 'Lyn' ? 'Good day, Madam Lyn' : `Welcome, ${user?.user_metadata?.first_name || 'Business Partner'}`}
           </h1>
           <p className="text-muted-foreground mt-2">
-            Here's what's happening in your shared workspace
+            Dubai & Philippines Business Operations Dashboard
           </p>
         </div>
-        <div className="flex items-center space-x-2">
-          <Users className="h-5 w-5 text-primary" />
+        <div className="flex items-center space-x-3">
           <Badge variant="secondary" className="bg-primary/10 text-primary">
-            Connected
+            🇵🇭 Philippines
           </Badge>
+          <Badge variant="outline" className="border-secondary/30 text-secondary">
+            🇦🇪 Dubai
+          </Badge>
+          <div className="flex items-center space-x-1">
+            <Users className="h-4 w-4 text-primary" />
+            <span className="text-xs text-muted-foreground">Partnership</span>
+          </div>
         </div>
       </div>
 
@@ -115,7 +121,7 @@ export default function Dashboard() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{loading ? "..." : stats.totalTransactions}</div>
-            <p className="text-xs text-muted-foreground">Financial records</p>
+            <p className="text-xs text-muted-foreground">₱ PHP / د.إ AED Records</p>
           </CardContent>
         </Card>
 
@@ -126,18 +132,18 @@ export default function Dashboard() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{loading ? "..." : stats.totalMemories}</div>
-            <p className="text-xs text-muted-foreground">Shared moments</p>
+            <p className="text-xs text-muted-foreground">Business milestones</p>
           </CardContent>
         </Card>
 
         <Card className="card-elegant">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Pending Tasks</CardTitle>
+            <CardTitle className="text-sm font-medium">Priority Tasks</CardTitle>
             <CheckSquare className="h-4 w-4 text-primary" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{loading ? "..." : stats.pendingTasks}</div>
-            <p className="text-xs text-muted-foreground">Need attention</p>
+            <p className="text-xs text-muted-foreground">Require immediate action</p>
           </CardContent>
         </Card>
 
@@ -148,7 +154,7 @@ export default function Dashboard() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{loading ? "..." : stats.totalMessages}</div>
-            <p className="text-xs text-muted-foreground">Conversations</p>
+            <p className="text-xs text-muted-foreground">Professional exchanges</p>
           </CardContent>
         </Card>
       </div>
@@ -161,7 +167,7 @@ export default function Dashboard() {
             <span>Quick Actions</span>
           </CardTitle>
           <CardDescription>
-            Jump into your most common tasks
+            Execute business operations efficiently
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -190,16 +196,16 @@ export default function Dashboard() {
         <CardHeader>
           <CardTitle className="flex items-center space-x-2">
             <TrendingUp className="h-5 w-5 text-primary" />
-            <span>Recent Activity</span>
+            <span>Business Operations</span>
           </CardTitle>
           <CardDescription>
-            Latest updates from your shared workspace
+            Latest activities across Dubai & Philippines ventures
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="text-center py-8 text-muted-foreground">
             <Calendar className="h-12 w-12 mx-auto mb-4 opacity-50" />
-            <p>Start using the app to see your activity here</p>
+            <p>Business operations will appear here once you begin tracking activities</p>
           </div>
         </CardContent>
       </Card>

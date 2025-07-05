@@ -39,7 +39,7 @@ export default function Navigation({ activeTab, onTabChange }: NavigationProps) 
               <Heart className="h-6 w-6 text-white" />
             </div>
             <span className="ml-3 text-xl font-display font-bold gradient-text">
-              Together
+              MarcLyn Business Hub
             </span>
           </div>
 
@@ -66,7 +66,7 @@ export default function Navigation({ activeTab, onTabChange }: NavigationProps) 
           <div className="flex items-center space-x-4">
             {user && (
               <span className="text-sm text-muted-foreground hidden sm:block">
-                Welcome, {user.user_metadata?.first_name || user.email}
+                {user.user_metadata?.first_name === 'Marc' ? 'Boss Marc' : user.user_metadata?.first_name === 'Lyn' ? 'Madam Lyn' : user.user_metadata?.first_name || user.email}
               </span>
             )}
             <Button

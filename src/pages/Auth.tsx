@@ -82,18 +82,18 @@ export default function Auth() {
               <Heart className="h-8 w-8 text-white" />
             </div>
           </div>
-          <h1 className="text-3xl font-display font-bold gradient-text mb-2">Together</h1>
-          <p className="text-muted-foreground">Your shared space for love and collaboration</p>
+          <h1 className="text-3xl font-display font-bold gradient-text mb-2">MarcLyn Hub</h1>
+          <p className="text-muted-foreground">Professional business collaboration platform</p>
         </div>
 
         <Card className="card-elegant">
           <CardHeader className="text-center">
             <div className="flex items-center justify-center mb-2">
               <Users className="h-5 w-5 text-primary mr-2" />
-              <CardTitle>Join Your Partner</CardTitle>
+              <CardTitle>Business Access Portal</CardTitle>
             </div>
             <CardDescription>
-              Sign in to your shared workspace or create your account
+              Access your Dubai & Philippines business operations dashboard
             </CardDescription>
           </CardHeader>
           <CardContent>

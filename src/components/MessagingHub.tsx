@@ -132,16 +132,16 @@ export default function MessagingHub() {
           <MessageCircle className="h-6 w-6 text-white" />
         </div>
         <div>
-          <h1 className="text-3xl font-display font-bold gradient-text">Messages</h1>
-          <p className="text-muted-foreground">Stay connected with your partner</p>
+          <h1 className="text-3xl font-display font-bold gradient-text">Business Communications</h1>
+          <p className="text-muted-foreground">Professional messaging for business coordination</p>
         </div>
       </div>
 
       <Card className="card-elegant h-[600px] flex flex-col">
         <CardHeader className="pb-4">
           <CardTitle className="flex items-center space-x-2">
-            <Heart className="h-5 w-5 text-secondary" />
-            <span>Private Chat</span>
+            <MessageCircle className="h-5 w-5 text-primary" />
+            <span>Executive Communication</span>
           </CardTitle>
         </CardHeader>
         
@@ -151,7 +151,7 @@ export default function MessagingHub() {
               {messages.length === 0 ? (
                 <div className="text-center text-muted-foreground py-8">
                   <MessageCircle className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                  <p>No messages yet. Start the conversation!</p>
+                  <p>No communications yet. Begin professional discussions.</p>
                 </div>
               ) : (
                 messages.map((message) => (
@@ -197,7 +197,7 @@ export default function MessagingHub() {
             <Input
               value={newMessage}
               onChange={(e) => setNewMessage(e.target.value)}
-              placeholder="Type your message..."
+              placeholder="Type your business message..."
               className="flex-1"
               disabled={loading}
             />

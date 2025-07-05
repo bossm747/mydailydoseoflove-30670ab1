@@ -19,17 +19,17 @@ All colors MUST be HSL for consistency and theming.
     --popover: 0 0% 100%;
     --popover-foreground: 185 25% 15%;
 
-    /* Primary brand - Teal */
-    --primary: 185 45% 25%;
+    /* Primary brand - Professional Purple for Madam Lyn */
+    --primary: 258 65% 35%;
     --primary-foreground: 0 0% 100%;
-    --primary-light: 185 35% 35%;
-    --primary-lighter: 185 25% 45%;
+    --primary-light: 258 55% 45%;
+    --primary-lighter: 258 45% 55%;
 
-    /* Secondary brand - Coral */
-    --secondary: 0 75% 65%;
+    /* Secondary brand - Elegant Rose Gold (subtle sweetness) */
+    --secondary: 340 35% 65%;
     --secondary-foreground: 0 0% 100%;
-    --secondary-light: 0 65% 75%;
-    --secondary-lighter: 0 55% 85%;
+    --secondary-light: 340 25% 75%;
+    --secondary-lighter: 340 15% 85%;
 
     /* Neutral colors */
     --muted: 185 15% 95%;
@@ -56,10 +56,10 @@ All colors MUST be HSL for consistency and theming.
     /* Design tokens */
     --radius: 0.75rem;
 
-    /* Beautiful gradients */
+    /* Professional gradients with hidden romance */
     --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-light)));
     --gradient-secondary: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--secondary-light)));
-    --gradient-warm: linear-gradient(135deg, hsl(var(--secondary-lighter)), hsl(var(--primary-lighter)));
+    --gradient-business: linear-gradient(135deg, hsl(var(--primary-lighter)), hsl(var(--secondary-lighter)));
     --gradient-hero: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 100%);
 
     /* Elegant shadows */
