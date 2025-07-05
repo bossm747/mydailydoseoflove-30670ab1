@@ -23,6 +23,7 @@ import PerformanceReviews from "@/components/hr/PerformanceReviews";
 import TimeTracker from "@/components/hr/TimeTracker";
 import ProductCatalog from "@/components/inventory/ProductCatalog";
 import InventoryManager from "@/components/inventory/InventoryManager";
+import { ProjectManager } from "@/components/projects/ProjectManager";
 import { useState } from "react";
 
 const Index = () => {
@@ -64,6 +65,8 @@ const Index = () => {
         return <CustomReports />;
       case 'business-manager':
         return <BusinessManager />;
+      case 'projects':
+        return <ProjectManager />;
       case 'memories':
         return <MemoryGallery />;
       case 'mood':
