@@ -21,13 +21,13 @@ interface Payment {
   currency: string;
   payment_method_type: string;
   status: string;
-  reference_number: string;
+  reference_number: string | null;
   net_amount: number;
   transaction_fee: number;
-  invoice_id: string;
+  invoice_id: string | null;
   invoices?: {
     invoice_number: string;
-  };
+  } | null;
   customers?: {
     first_name: string;
     last_name: string;
@@ -98,7 +98,7 @@ export const PaymentManager: React.FC = () => {
       const { data, error } = await query;
 
       if (error) throw error;
-      setPayments(data || []);
+      setPayments((data as any) || []);
     } catch (error: any) {
       toast({
         title: "Error",

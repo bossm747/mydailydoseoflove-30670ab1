@@ -79,9 +79,8 @@ export const InvoiceManager: React.FC = () => {
       }
 
       const { data, error } = await query;
-
       if (error) throw error;
-      setInvoices(data || []);
+      setInvoices((data as any) || []);
     } catch (error: any) {
       toast({
         title: "Error",
