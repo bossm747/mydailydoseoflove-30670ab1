@@ -1,9 +1,10 @@
 import { Button } from "@/components/ui/button";
-import { Heart, Home, DollarSign, Calendar, MessageCircle, Settings, Menu, LogOut, TrendingUp, Users, UserCheck, Clock, Package, CheckCircle, Receipt, BarChart3, Target, Download } from "lucide-react";
-import { useState } from "react";
+import { Heart, Home, DollarSign, Calendar, MessageCircle, Settings, LogOut, TrendingUp, Users, UserCheck, Clock, Package, CheckCircle, Receipt, BarChart3, Target, Download } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import { BusinessSelector } from "./business/BusinessSelector";
+import MobileNavigation from "./MobileNavigation";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface NavigationProps {
   activeTab: string;
@@ -13,6 +14,7 @@ interface NavigationProps {
 export default function Navigation({ activeTab, onTabChange }: NavigationProps) {
   const { signOut, user } = useAuth();
   const { toast } = useToast();
+  const isMobile = useIsMobile();
 
   const navItems = [
     { id: 'dashboard', label: 'Dashboard', icon: Home },
@@ -107,12 +109,8 @@ export default function Navigation({ activeTab, onTabChange }: NavigationProps) 
             </Button>
           </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-            <Button variant="ghost" size="sm">
-              <Menu className="h-5 w-5" />
-            </Button>
-          </div>
+          {/* Mobile Navigation */}
+          <MobileNavigation activeTab={activeTab} onTabChange={onTabChange} />
         </div>
       </div>
     </nav>

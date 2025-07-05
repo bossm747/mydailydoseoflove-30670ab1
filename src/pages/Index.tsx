@@ -1,4 +1,5 @@
 import Navigation from "@/components/Navigation";
+import InstallPrompt from "@/components/InstallPrompt";
 import Dashboard from "@/components/Dashboard";
 import FinanceDashboard from "@/components/FinanceDashboard";
 import MemoryGallery from "@/components/MemoryGallery";
@@ -108,6 +109,7 @@ const Index = () => {
       <main className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
         {renderContent()}
       </main>
+      <InstallPrompt />
     </div>
   );
 };
