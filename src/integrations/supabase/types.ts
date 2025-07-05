@@ -281,6 +281,63 @@ export type Database = {
         }
         Relationships: []
       }
+      budgets: {
+        Row: {
+          alert_threshold: number | null
+          allocated_amount: number
+          budget_name: string
+          budget_period_end: string
+          budget_period_start: string
+          budget_type: string
+          business_id: string | null
+          category: string | null
+          created_at: string
+          id: string
+          is_active: boolean | null
+          notes: string | null
+          remaining_amount: number | null
+          spent_amount: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          alert_threshold?: number | null
+          allocated_amount?: number
+          budget_name: string
+          budget_period_end: string
+          budget_period_start: string
+          budget_type?: string
+          business_id?: string | null
+          category?: string | null
+          created_at?: string
+          id?: string
+          is_active?: boolean | null
+          notes?: string | null
+          remaining_amount?: number | null
+          spent_amount?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          alert_threshold?: number | null
+          allocated_amount?: number
+          budget_name?: string
+          budget_period_end?: string
+          budget_period_start?: string
+          budget_type?: string
+          business_id?: string | null
+          category?: string | null
+          created_at?: string
+          id?: string
+          is_active?: boolean | null
+          notes?: string | null
+          remaining_amount?: number | null
+          spent_amount?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       bulk_operations: {
         Row: {
           business_id: string | null
@@ -1048,6 +1105,86 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      expenses: {
+        Row: {
+          amount: number
+          approved_at: string | null
+          approved_by: string | null
+          business_id: string | null
+          category: string | null
+          created_at: string
+          currency: string | null
+          description: string | null
+          expense_date: string
+          expense_name: string
+          id: string
+          is_billable: boolean | null
+          is_recurring: boolean | null
+          payment_method: string | null
+          project_id: string | null
+          receipt_url: string | null
+          recurring_frequency: string | null
+          status: string | null
+          updated_at: string
+          user_id: string
+          vendor_name: string | null
+        }
+        Insert: {
+          amount: number
+          approved_at?: string | null
+          approved_by?: string | null
+          business_id?: string | null
+          category?: string | null
+          created_at?: string
+          currency?: string | null
+          description?: string | null
+          expense_date?: string
+          expense_name: string
+          id?: string
+          is_billable?: boolean | null
+          is_recurring?: boolean | null
+          payment_method?: string | null
+          project_id?: string | null
+          receipt_url?: string | null
+          recurring_frequency?: string | null
+          status?: string | null
+          updated_at?: string
+          user_id: string
+          vendor_name?: string | null
+        }
+        Update: {
+          amount?: number
+          approved_at?: string | null
+          approved_by?: string | null
+          business_id?: string | null
+          category?: string | null
+          created_at?: string
+          currency?: string | null
+          description?: string | null
+          expense_date?: string
+          expense_name?: string
+          id?: string
+          is_billable?: boolean | null
+          is_recurring?: boolean | null
+          payment_method?: string | null
+          project_id?: string | null
+          receipt_url?: string | null
+          recurring_frequency?: string | null
+          status?: string | null
+          updated_at?: string
+          user_id?: string
+          vendor_name?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fk_expenses_project"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       file_uploads: {
         Row: {
@@ -3334,6 +3471,45 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      sales_pipeline_stages: {
+        Row: {
+          business_id: string | null
+          created_at: string
+          id: string
+          is_active: boolean | null
+          probability_percentage: number | null
+          stage_color: string | null
+          stage_name: string
+          stage_order: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          business_id?: string | null
+          created_at?: string
+          id?: string
+          is_active?: boolean | null
+          probability_percentage?: number | null
+          stage_color?: string | null
+          stage_name: string
+          stage_order?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          business_id?: string | null
+          created_at?: string
+          id?: string
+          is_active?: boolean | null
+          probability_percentage?: number | null
+          stage_color?: string | null
+          stage_name?: string
+          stage_order?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
       }
       search_indexes: {
         Row: {
