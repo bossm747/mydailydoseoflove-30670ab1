@@ -15,6 +15,8 @@ import {
   Calendar,
   Plus
 } from "lucide-react";
+import TransactionForm from "@/components/transactions/TransactionForm";
+import BudgetManager from "@/components/budget/BudgetManager";
 
 const FinanceDashboard = () => {
   const budgetCategories = [
@@ -47,10 +49,12 @@ const FinanceDashboard = () => {
                 Track your shared expenses and build your future together
               </p>
             </div>
-            <Button variant="elegant" size="lg">
-              <Plus size={20} />
-              Add Transaction
-            </Button>
+            <TransactionForm trigger={
+              <Button className="btn-primary" size="lg">
+                <Plus size={20} />
+                Add Transaction
+              </Button>
+            } />
           </div>
           
           <div className="relative h-48 rounded-2xl overflow-hidden mb-8">
@@ -231,33 +235,9 @@ const FinanceDashboard = () => {
           </div>
         </div>
 
-        {/* Quick Actions */}
+        {/* Budget Management */}
         <div className="mt-8">
-          <Card className="card-elegant">
-            <CardHeader>
-              <CardTitle className="text-xl font-display">Quick Actions</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <Button variant="outline" className="h-auto p-4 flex flex-col items-center space-y-2">
-                  <Plus size={24} />
-                  <span>Add Expense</span>
-                </Button>
-                <Button variant="outline" className="h-auto p-4 flex flex-col items-center space-y-2">
-                  <PieChart size={24} />
-                  <span>View Reports</span>
-                </Button>
-                <Button variant="outline" className="h-auto p-4 flex flex-col items-center space-y-2">
-                  <Target size={24} />
-                  <span>Set Goal</span>
-                </Button>
-                <Button variant="outline" className="h-auto p-4 flex flex-col items-center space-y-2">
-                  <DollarSign size={24} />
-                  <span>Transfer</span>
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
+          <BudgetManager />
         </div>
       </div>
     </div>

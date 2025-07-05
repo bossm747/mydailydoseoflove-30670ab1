@@ -15,6 +15,7 @@ import {
   AlertCircle,
   Star
 } from "lucide-react";
+import TaskForm from "@/components/tasks/TaskForm";
 
 const BusinessHub = () => {
   const projects = [
@@ -87,10 +88,12 @@ const BusinessHub = () => {
                 <FileText size={20} />
                 New Document
               </Button>
-              <Button variant="elegant" size="lg">
-                <Plus size={20} />
-                New Project
-              </Button>
+              <TaskForm trigger={
+                <Button className="btn-primary" size="lg">
+                  <Plus size={20} />
+                  New Task
+                </Button>
+              } />
             </div>
           </div>
 
@@ -228,10 +231,12 @@ const BusinessHub = () => {
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <CardTitle className="text-xl font-display">Recent Tasks</CardTitle>
-                  <Button variant="outline">
-                    <Plus size={16} />
-                    Add Task
-                  </Button>
+                  <TaskForm trigger={
+                    <Button variant="outline">
+                      <Plus size={16} />
+                      Add Task
+                    </Button>
+                  } />
                 </div>
               </CardHeader>
               <CardContent>

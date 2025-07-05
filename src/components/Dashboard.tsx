@@ -16,6 +16,9 @@ import {
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { useState, useEffect } from "react";
+import TransactionForm from "@/components/transactions/TransactionForm";
+import TaskForm from "@/components/tasks/TaskForm";
+import MemoryForm from "@/components/memories/MemoryForm";
 
 interface DashboardStats {
   totalTransactions: number;
@@ -172,21 +175,66 @@ export default function Dashboard() {
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {quickActions.map((action) => (
-              <Button
-                key={action.label}
-                variant="outline"
-                className="h-auto p-4 flex flex-col items-center space-y-2 hover:shadow-md transition-all duration-200"
-              >
-                <div className={`w-12 h-12 bg-gradient-to-r ${action.gradient} rounded-full flex items-center justify-center`}>
-                  <action.icon className="h-6 w-6 text-white" />
-                </div>
-                <div className="text-center">
-                  <p className="font-medium">{action.label}</p>
-                  <p className="text-xs text-muted-foreground">{action.description}</p>
-                </div>
-              </Button>
-            ))}
+            <TransactionForm 
+              trigger={
+                <Button
+                  variant="outline"
+                  className="h-auto p-4 flex flex-col items-center space-y-2 hover:shadow-md transition-all duration-200"
+                >
+                  <div className="w-12 h-12 bg-gradient-to-r from-success to-success/80 rounded-full flex items-center justify-center">
+                    <DollarSign className="h-6 w-6 text-white" />
+                  </div>
+                  <div className="text-center">
+                    <p className="font-medium">Financial Record</p>
+                    <p className="text-xs text-muted-foreground">Business transactions PHP/AED</p>
+                  </div>
+                </Button>
+              }
+            />
+            <MemoryForm 
+              trigger={
+                <Button
+                  variant="outline"
+                  className="h-auto p-4 flex flex-col items-center space-y-2 hover:shadow-md transition-all duration-200"
+                >
+                  <div className="w-12 h-12 bg-gradient-to-r from-secondary to-secondary-light rounded-full flex items-center justify-center">
+                    <Camera className="h-6 w-6 text-white" />
+                  </div>
+                  <div className="text-center">
+                    <p className="font-medium">Archive Memory</p>
+                    <p className="text-xs text-muted-foreground">Document important moments</p>
+                  </div>
+                </Button>
+              }
+            />
+            <TaskForm 
+              trigger={
+                <Button
+                  variant="outline"
+                  className="h-auto p-4 flex flex-col items-center space-y-2 hover:shadow-md transition-all duration-200"
+                >
+                  <div className="w-12 h-12 bg-gradient-to-r from-primary to-primary-light rounded-full flex items-center justify-center">
+                    <CheckSquare className="h-6 w-6 text-white" />
+                  </div>
+                  <div className="text-center">
+                    <p className="font-medium">Business Task</p>
+                    <p className="text-xs text-muted-foreground">Manage operations efficiently</p>
+                  </div>
+                </Button>
+              }
+            />
+            <Button
+              variant="outline"
+              className="h-auto p-4 flex flex-col items-center space-y-2 hover:shadow-md transition-all duration-200"
+            >
+              <div className="w-12 h-12 bg-gradient-to-r from-primary-lighter to-secondary-lighter rounded-full flex items-center justify-center">
+                <MessageCircle className="h-6 w-6 text-white" />
+              </div>
+              <div className="text-center">
+                <p className="font-medium">Professional Message</p>
+                <p className="text-xs text-muted-foreground">Business communication</p>
+              </div>
+            </Button>
           </div>
         </CardContent>
       </Card>

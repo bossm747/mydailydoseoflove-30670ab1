@@ -4,6 +4,7 @@ import FinanceDashboard from "@/components/FinanceDashboard";
 import MemoryGallery from "@/components/MemoryGallery";
 import BusinessHub from "@/components/BusinessHub";
 import MessagingHub from "@/components/MessagingHub";
+import SharedCalendar from "@/components/calendar/SharedCalendar";
 import { useState } from "react";
 
 const Index = () => {
@@ -21,6 +22,8 @@ const Index = () => {
         return <BusinessHub />;
       case 'messages':
         return <MessagingHub />;
+      case 'calendar':
+        return <SharedCalendar />;
       default:
         return <Dashboard />;
     }

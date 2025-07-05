@@ -15,6 +15,7 @@ import {
   Share,
   Star
 } from "lucide-react";
+import MemoryForm from "@/components/memories/MemoryForm";
 
 const MemoryGallery = () => {
   // Sample memories data
@@ -107,10 +108,12 @@ const MemoryGallery = () => {
                 <Upload size={20} />
                 Upload
               </Button>
-              <Button variant="coral" size="lg">
-                <Camera size={20} />
-                Add Memory
-              </Button>
+              <MemoryForm trigger={
+                <Button className="btn-secondary" size="lg">
+                  <Camera size={20} />
+                  Add Memory
+                </Button>
+              } />
             </div>
           </div>
           
