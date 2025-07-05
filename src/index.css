@@ -2,41 +2,75 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/* Together App Design System - Couple's Collaboration Platform
+All colors MUST be HSL for consistency and theming.
 */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Base colors */
+    --background: 25 25% 98%;
+    --foreground: 185 25% 15%;
 
+    /* Card and surface colors */
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 185 25% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 185 25% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary brand - Teal */
+    --primary: 185 45% 25%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 185 35% 35%;
+    --primary-lighter: 185 25% 45%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary brand - Coral */
+    --secondary: 0 75% 65%;
+    --secondary-foreground: 0 0% 100%;
+    --secondary-light: 0 65% 75%;
+    --secondary-lighter: 0 55% 85%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Neutral colors */
+    --muted: 185 15% 95%;
+    --muted-foreground: 185 10% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 185 20% 90%;
+    --accent-foreground: 185 25% 15%;
+
+    /* Status colors */
+    --success: 142 70% 45%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 38 95% 55%;
+    --warning-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Borders and inputs */
+    --border: 185 20% 85%;
+    --input: 185 20% 92%;
+    --ring: 185 45% 25%;
 
-    --radius: 0.5rem;
+    /* Design tokens */
+    --radius: 0.75rem;
+
+    /* Beautiful gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-light)));
+    --gradient-secondary: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--secondary-light)));
+    --gradient-warm: linear-gradient(135deg, hsl(var(--secondary-lighter)), hsl(var(--primary-lighter)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 100%);
+
+    /* Elegant shadows */
+    --shadow-soft: 0 2px 10px -2px hsl(var(--primary) / 0.1);
+    --shadow-medium: 0 8px 25px -5px hsl(var(--primary) / 0.15);
+    --shadow-strong: 0 15px 35px -5px hsl(var(--primary) / 0.2);
+    --shadow-glow: 0 0 30px hsl(var(--secondary) / 0.3);
+
+    /* Smooth transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +134,51 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* Beautiful component styles */
+@layer components {
+  .btn-primary {
+    @apply bg-gradient-to-r from-primary to-primary-light text-primary-foreground;
+    @apply hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300;
+  }
+
+  .btn-secondary {
+    @apply bg-gradient-to-r from-secondary to-secondary-light text-secondary-foreground;
+    @apply hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300;
+  }
+
+  .card-elegant {
+    @apply bg-card border border-border rounded-xl p-6;
+    box-shadow: var(--shadow-soft);
+    @apply hover:shadow-medium transition-shadow duration-300;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+  }
+
+  .floating-heart {
+    animation: float-heart 3s ease-in-out infinite;
+  }
+}
+
+/* Delightful animations */
+@layer utilities {
+  @keyframes float-heart {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(2deg); }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 5px hsl(var(--secondary) / 0.3); }
+    50% { box-shadow: 0 0 20px hsl(var(--secondary) / 0.6); }
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
   }
 }
