@@ -16,6 +16,8 @@ import BusinessManager from "@/components/business/BusinessManager";
 import SalesDashboard from "@/components/sales/SalesDashboard";
 import CustomerManager from "@/components/sales/CustomerManager";
 import LeadsManager from "@/components/sales/LeadsManager";
+import EmployeeManager from "@/components/hr/EmployeeManager";
+import TimeTracker from "@/components/hr/TimeTracker";
 import { useState } from "react";
 
 const Index = () => {
@@ -31,6 +33,10 @@ const Index = () => {
         return <CustomerManager />;
       case 'leads':
         return <LeadsManager />;
+      case 'employees':
+        return <EmployeeManager />;
+      case 'time-tracker':
+        return <TimeTracker />;
       case 'finance':
         return <FinanceDashboard />;
       case 'banking':

@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Heart, Home, DollarSign, Calendar, MessageCircle, Settings, Menu, LogOut, TrendingUp, Users, UserCheck } from "lucide-react";
+import { Heart, Home, DollarSign, Calendar, MessageCircle, Settings, Menu, LogOut, TrendingUp, Users, UserCheck, Clock } from "lucide-react";
 import { useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
@@ -19,6 +19,8 @@ export default function Navigation({ activeTab, onTabChange }: NavigationProps) 
     { id: 'sales', label: 'Sales', icon: TrendingUp },
     { id: 'customers', label: 'Customers', icon: Users },
     { id: 'leads', label: 'Leads', icon: UserCheck },
+    { id: 'employees', label: 'Employees', icon: Users },
+    { id: 'time-tracker', label: 'Time Tracker', icon: Clock },
     { id: 'finance', label: 'Finance', icon: DollarSign },
     { id: 'banking', label: 'Banking', icon: DollarSign },
     { id: 'assets', label: 'Assets', icon: Home },
