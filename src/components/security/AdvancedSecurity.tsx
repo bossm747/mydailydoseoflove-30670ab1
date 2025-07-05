@@ -22,7 +22,7 @@ interface SecuritySettings {
   locked_until: string | null;
   password_changed_at: string | null;
   security_questions: any;
-  trusted_devices: any[];
+  trusted_devices: any;
 }
 
 interface AuditLog {

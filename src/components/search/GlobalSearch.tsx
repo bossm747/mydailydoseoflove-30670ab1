@@ -23,18 +23,29 @@ export default function GlobalSearch() {
     
     setLoading(true);
     try {
-      // Simplified search implementation
+      // Search across indexed content
+      const { data, error } = await supabase
+        .from('search_indexes')
+        .select('*')
+        .eq('user_id', user.id)
+        .textSearch('search_vector', searchQuery)
+        .limit(20);
+
+      if (error) throw error;
+
+      setResults(data || []);
+      
       toast({
         title: "Search Complete",
-        description: `Searching for: ${searchQuery}`,
+        description: `Found ${data?.length || 0} results for: ${searchQuery}`,
       });
-      setResults([]);
     } catch (error: any) {
       toast({
         title: "Search Error",
         description: error.message,
         variant: "destructive",
       });
+      setResults([]);
     } finally {
       setLoading(false);
     }
@@ -67,6 +78,35 @@ export default function GlobalSearch() {
           </div>
         </CardContent>
       </Card>
+
+      {results.length > 0 && (
+        <Card>
+          <CardHeader>
+            <CardTitle>Search Results</CardTitle>
+            <CardDescription>{results.length} results found</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {results.map((result: any) => (
+                <div key={result.id} className="border rounded-lg p-4">
+                  <div className="flex items-start justify-between mb-2">
+                    <h3 className="font-medium">{result.title}</h3>
+                    <Badge variant="outline">{result.record_type}</Badge>
+                  </div>
+                  <p className="text-sm text-muted-foreground mb-2">
+                    {result.content.substring(0, 200)}...
+                  </p>
+                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                    <span>{result.table_name}</span>
+                    <span>•</span>
+                    <span>{new Date(result.updated_at).toLocaleDateString()}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
     </div>
   );
 }
