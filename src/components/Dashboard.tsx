@@ -1,14 +1,83 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import Navigation from "@/components/Navigation";
-import heroImage from "@/assets/hero-image.jpg";
-import { Heart, DollarSign, CheckSquare, Camera, MessageCircle, TrendingUp } from "lucide-react";
+import { Progress } from "@/components/ui/progress";
+import { 
+  Heart, 
+  DollarSign, 
+  TrendingUp, 
+  Calendar, 
+  CheckSquare, 
+  Camera,
+  MessageCircle,
+  Users,
+  PlusCircle
+} from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
+import { useState, useEffect } from "react";
 
-const Dashboard = () => {
+interface DashboardStats {
+  totalTransactions: number;
+  totalMemories: number;
+  pendingTasks: number;
+  totalMessages: number;
+}
+
+export default function Dashboard() {
+  const { user } = useAuth();
+  const [stats, setStats] = useState<DashboardStats>({
+    totalTransactions: 0,
+    totalMemories: 0,
+    pendingTasks: 0,
+    totalMessages: 0,
+  });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchDashboardStats();
+  }, []);
+
+  const fetchDashboardStats = async () => {
+    try {
+      const [transactionsRes, memoriesRes, tasksRes, messagesRes] = await Promise.all([
+        supabase.from('transactions').select('id', { count: 'exact', head: true }),
+        supabase.from('memories').select('id', { count: 'exact', head: true }),
+        supabase.from('tasks').select('id', { count: 'exact', head: true }).eq('status', 'pending'),
+        supabase.from('messages').select('id', { count: 'exact', head: true }),
+      ]);
+
+      setStats({
+        totalTransactions: transactionsRes.count || 0,
+        totalMemories: memoriesRes.count || 0,
+        pendingTasks: tasksRes.count || 0,
+        totalMessages: messagesRes.count || 0,
+      });
+    } catch (error) {
+      console.error('Error fetching dashboard stats:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-accent/30">
-      <Navigation />
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-display font-bold gradient-text">
+            Welcome Back, {user?.user_metadata?.first_name || 'Partner'}!
+          </h1>
+          <p className="text-muted-foreground mt-2">
+            Here's what's happening in your shared workspace
+          </p>
+        </div>
+        <div className="flex items-center space-x-2">
+          <Users className="h-5 w-5 text-primary" />
+          <Badge variant="secondary" className="bg-primary/10 text-primary">
+            Connected
+          </Badge>
+        </div>
+      </div>
       
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-r from-primary to-secondary text-white">
