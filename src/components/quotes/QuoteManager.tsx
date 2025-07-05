@@ -15,8 +15,6 @@ interface Quote {
   id: string;
   quote_number: string;
   customer_id: string;
-  quote_date: string;
-  expiry_date: string;
   status: string;
   subtotal: number;
   tax_amount: number;
@@ -24,7 +22,6 @@ interface Quote {
   total_amount: number;
   currency: string;
   notes: string;
-  terms_conditions: string;
   created_at: string;
   updated_at: string;
 }
@@ -276,9 +273,6 @@ export default function QuoteManager() {
                     <div className="flex items-center gap-2 mb-2">
                       <h3 className="font-semibold text-lg">{quote.quote_number}</h3>
                       {getStatusBadge(quote.status)}
-                      {isExpired(quote.expiry_date) && quote.status !== 'accepted' && (
-                        <Badge variant="destructive">Expired</Badge>
-                      )}
                     </div>
                     <p className="text-muted-foreground">Customer ID: {quote.customer_id}</p>
                   </div>
@@ -292,26 +286,14 @@ export default function QuoteManager() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+                <div className="grid grid-cols-2 md:grid-cols-2 gap-4 mb-4">
                   <div className="flex items-center gap-2">
-                    <Calendar className="h-4 w-4 text-muted-foreground" />
-                    <span className="text-sm">
-                      {new Date(quote.quote_date).toLocaleDateString()}
-                    </span>
+                    <span className="text-sm text-muted-foreground">Status:</span>
+                    <span className="text-sm">{quote.status}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Calendar className="h-4 w-4 text-muted-foreground" />
-                    <span className="text-sm">
-                      Expires: {new Date(quote.expiry_date).toLocaleDateString()}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm text-muted-foreground">Subtotal:</span>
-                    <span className="text-sm">₱{quote.subtotal.toLocaleString()}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm text-muted-foreground">Tax:</span>
-                    <span className="text-sm">₱{quote.tax_amount.toLocaleString()}</span>
+                    <span className="text-sm text-muted-foreground">Currency:</span>
+                    <span className="text-sm">{quote.currency}</span>
                   </div>
                 </div>
 
