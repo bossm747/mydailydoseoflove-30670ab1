@@ -180,13 +180,13 @@ export function AppSidebar({ activeTab, onTabChange }: AppSidebarProps) {
     <Sidebar className="border-r" collapsible="icon">
       <SidebarHeader className="border-b p-4">
         <div className="flex items-center gap-3">
-          <div className="bg-gradient-to-r from-primary to-secondary p-2 rounded-lg flex-shrink-0">
-            <Heart className="h-5 w-5 text-white" />
+          <div className="bg-white p-1 rounded-lg flex-shrink-0">
+            <img src="/lovable-uploads/3ae2e94d-ea70-4647-b5f1-5691b43b8b1d.png" alt="Silver Connect" className="h-8 w-8" />
           </div>
           {!collapsed && (
             <div className="flex flex-col min-w-0">
-              <span className="text-sm font-bold truncate">MarcLyn</span>
-              <span className="text-xs text-muted-foreground truncate">Business Hub</span>
+              <span className="text-sm font-bold truncate">Silver Connect</span>
+              <span className="text-xs text-muted-foreground truncate">Business Platform</span>
             </div>
           )}
         </div>

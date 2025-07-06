@@ -122,12 +122,12 @@ export default function MobileNavigation({ activeTab, onTabChange }: MobileNavig
       <SheetContent side="left" className="w-80 p-0">
         <SheetHeader className="p-6 pb-4">
           <div className="flex items-center gap-3">
-            <div className="bg-gradient-to-r from-primary to-secondary p-2 rounded-lg">
-              <Heart className="h-6 w-6 text-white" />
+            <div className="bg-white p-1 rounded-lg">
+              <img src="/lovable-uploads/3ae2e94d-ea70-4647-b5f1-5691b43b8b1d.png" alt="Silver Connect" className="h-8 w-8" />
             </div>
             <div>
               <SheetTitle className="text-left font-display gradient-text">
-                MarcLyn Business Hub
+                Silver Connect
               </SheetTitle>
               {user && (
                 <p className="text-sm text-muted-foreground">

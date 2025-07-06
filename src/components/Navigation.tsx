@@ -67,11 +67,11 @@ export default function Navigation({ activeTab, onTabChange }: NavigationProps) 
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <div className="bg-gradient-to-r from-primary to-secondary p-2 rounded-lg">
-              <Heart className="h-6 w-6 text-white" />
+            <div className="bg-white p-1 rounded-lg">
+              <img src="/lovable-uploads/3ae2e94d-ea70-4647-b5f1-5691b43b8b1d.png" alt="Silver Connect" className="h-8 w-8" />
             </div>
             <span className="ml-3 text-xl font-display font-bold gradient-text">
-              MarcLyn Business Hub
+              Silver Connect
             </span>
           </div>
 

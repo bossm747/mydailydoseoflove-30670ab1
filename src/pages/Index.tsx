@@ -154,7 +154,7 @@ const Index = () => {
             <SidebarTrigger className="-ml-1" />
             <div className="flex-1" />
             <div className="text-sm font-medium">
-              MarcLyn Business Hub
+              Silver Connect
             </div>
           </header>
 
