@@ -30,7 +30,8 @@ import {
   CreditCard,
   FileText,
   Folder,
-  PieChart
+  PieChart,
+  Bell
 } from "lucide-react";
 
 import {
@@ -139,6 +140,12 @@ export function AppSidebar({ activeTab, onTabChange }: AppSidebarProps) {
       items: [
         { id: 'security', label: 'Advanced Security', icon: Shield },
         { id: 'performance', label: 'Performance Monitor', icon: Activity },
+      ]
+    },
+    {
+      label: "System & Alerts", 
+      items: [
+        { id: 'notifications', label: 'Notifications', icon: Bell },
       ]
     },
     {

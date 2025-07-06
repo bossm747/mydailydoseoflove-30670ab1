@@ -44,6 +44,7 @@ import OpportunityManager from "@/components/opportunities/OpportunityManager";
 import SalesPipelineManager from "@/components/pipeline/SalesPipelineManager";
 import BudgetManager from "@/components/budget/BudgetManager";
 import QuoteManager from "@/components/quotes/QuoteManager";
+import NotificationCenter from "@/components/notifications/NotificationCenter";
 import { useState } from "react";
 
 const Index = () => {
@@ -125,6 +126,8 @@ const Index = () => {
         return <AdvancedSecurity />;
       case 'performance':
         return <PerformanceMonitor />;
+      case 'notifications':
+        return <NotificationCenter />;
       case 'memories':
         return <MemoryGallery />;
       case 'mood':
